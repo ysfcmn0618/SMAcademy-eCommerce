@@ -4,12 +4,14 @@ namespace App.e_commerce.Controllers
 {
     public class CartController : Controller
     {
+        [Route("new")]
         //Sepete Ürün Ekleme
         public IActionResult AddProduct()
         {
             return View();
         }
+        [Route("edit/{id:int}")]
         //Sepetteki Ürünleri Düzenleme
-        public IActionResult Edit() { return View(); }
+        public IActionResult Edit([FromRoute] int id) { return View(); }
     }
 }
