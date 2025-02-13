@@ -2,7 +2,7 @@
 using App.e_commerce.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.e_commerce.Controllers
+namespace App.eCommerce.Controllers
 {
     public class HomeController : Controller
     {

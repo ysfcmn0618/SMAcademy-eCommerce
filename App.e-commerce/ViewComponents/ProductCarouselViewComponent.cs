@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace App.e_commerce.ViewComponents
+namespace App.eCommerce.ViewComponents
 {
     public class ProductCarouselViewComponent : ViewComponent
     {

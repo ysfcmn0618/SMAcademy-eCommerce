@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.e-commerce", "App.e-commerce\App.e-commerce.csproj", "{431B05C2-D0E6-4B2F-A6F8-99C6B5543475}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.eCommerce", "App.e-commerce\App.eCommerce.csproj", "{431B05C2-D0E6-4B2F-A6F8-99C6B5543475}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{3CB28633-B376-4062-B8BC-C90FB75F230A}"
 EndProject

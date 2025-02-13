@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace App.e_commerce.Controllers
+namespace App.eCommerce.Controllers
 {
     public class AuthController : Controller
     {
