@@ -6,14 +6,12 @@ namespace App.eCommerce.ViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // Fetch or generate the data needed for the view component
             var products = await GetProductsAsync();
             return View(products);
         }
 
         private Task<List<Product>> GetProductsAsync()
         {
-            // Replace with your actual data fetching logic
             return Task.FromResult(new List<Product>
            {
                new Product{Id=1,Img="img/categories/cat-1.jpg",Name="Drink Fruits"},
