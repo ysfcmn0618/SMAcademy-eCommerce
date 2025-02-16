@@ -4,13 +4,16 @@ namespace Admin.Controllers
 {
     public class UserController : Controller
     {
-        //Kullanıcı Listeleme
+        [Route("/users")]
+        [HttpGet]
         public IActionResult List()
         {
             return View();
         }
-        //Satıcı Olma Onayı
-        public IActionResult Approve()
+
+        [Route("/users/{userId:int}/approve")]
+        [HttpGet]
+        public IActionResult Approve([FromRoute] int userId)
         {
             return View();
         }
