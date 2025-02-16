@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Admin.Controllers
+namespace App.Admin.Controllers
 {
     public class CommentController : Controller
     {

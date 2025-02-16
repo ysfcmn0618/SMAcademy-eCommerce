@@ -1,4 +1,4 @@
-﻿namespace Admin.Models.ViewModels
+﻿namespace App.Admin.Models.ViewModels
 {
     public class LoginViewModel
     {

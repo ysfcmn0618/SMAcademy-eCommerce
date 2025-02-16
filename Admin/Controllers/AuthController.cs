@@ -1,7 +1,7 @@
-﻿using Admin.Models.ViewModels;
+﻿using App.Admin.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Admin.Controllers
+namespace App.Admin.Controllers
 {
     public class AuthController : Controller
     {
