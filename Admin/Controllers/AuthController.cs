@@ -1,4 +1,4 @@
-﻿using App.Admin.Models.ViewModels;
+﻿using Admin.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Admin.Controllers

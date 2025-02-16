@@ -11,16 +11,37 @@ namespace App.eCommerce.Controllers
         {
             return View();
         }
-        [Route("about-us")]
+        [Route("/about-us")]
         //Hakkımızda
         public IActionResult AboutUs() { return View(); }
         //İletişim
-        public IActionResult Contact() { return View(); }
-        //Ürün Listeleme
-        public IActionResult Listing() { return View(); }
-        [Route("/product/{categoryName}-{title}-{id:int}/details")]
-        //Ürün Görüntüleme
-        public IActionResult ProductDetail([FromRoute] string categoryName, [FromRoute] string title, [FromRoute] int id) { return View(); }
+        [Route("/contact")]
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [Route("/contact")]
+        [HttpPost]
+        public IActionResult Contact([FromForm] object newContactMessageModel)
+        {
+            return View();
+        }
+
+        [Route("/product/list")]
+        [HttpGet]
+        public IActionResult Listing()
+        {
+            return View();
+        }
+
+        [Route("/product/{productId:int}/details")]
+        [HttpGet]
+        public IActionResult ProductDetail([FromRoute] int productId)
+        {
+            return View();
+        }
 
 
     }

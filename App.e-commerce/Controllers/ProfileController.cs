@@ -4,21 +4,32 @@ namespace App.eCommerce.Controllers
 {
     public class ProfileController : Controller
     {
-        [Route("detail/{id:int}/{name}-{surname}")]
-        //Kullanıcı Bilgileri Görüntüleme
+        [Route("/profile")]
+        [HttpGet]
         public IActionResult Details()
         {
             return View();
         }
-        [Route("edit/{id:int}/{name}-{surname}")]
-        //Kullanıcı Bilgileri Güncelleme
-        public IActionResult Edit() { return View(); }
-        [Route("my-order-list")]
-        //Siparişlerim
-        public IActionResult MyOrders() { return View(); }
-        [Route("my-product-list")]
-        //Satıcı Kendi Ürünlerini Listeleme
-        public IActionResult MyProducts() { return View(); }
 
+        [Route("/profile")]
+        [HttpPost]
+        public IActionResult Edit([FromForm] object editMyProfileModel)
+        {
+            return RedirectToAction(nameof(Details));
+        }
+
+        [Route("/my-orders")]
+        [HttpGet]
+        public IActionResult MyOrders()
+        {
+            return View();
+        }
+
+        [Route("/my-products")]
+        [HttpGet]
+        public IActionResult MyProducts()
+        {
+            return View();
+        }
     }
 }

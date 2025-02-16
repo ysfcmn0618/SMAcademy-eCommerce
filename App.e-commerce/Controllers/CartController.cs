@@ -4,14 +4,34 @@ namespace App.eCommerce.Controllers
 {
     public class CartController : Controller
     {
-        [Route("new")]
-        //Sepete Ürün Ekleme
-        public IActionResult AddProduct()
+        [Route("/add-to-cart/{productId:int}")]
+        [HttpGet]
+        public IActionResult AddProduct([FromRoute] int productId)
+        {
+            // add 1 product...
+
+            var prevUrl = Request.Headers.Referer.FirstOrDefault();
+
+            if (prevUrl is null)
+            {
+                return RedirectToAction(nameof(Edit));
+            }
+
+            return Redirect(prevUrl);
+        }
+
+        [Route("/cart")]
+        [HttpGet]
+        public IActionResult Edit()
         {
             return View();
         }
-        [Route("edit/{id:int}")]
-        //Sepetteki Ürünleri Düzenleme
-        public IActionResult Edit([FromRoute] int id) { return View(); }
+
+        [Route("/cart")]
+        [HttpPost]
+        public IActionResult Edit([FromForm] object editCartModel)
+        {
+            return View();
+        }
     }
 }
