@@ -13,8 +13,12 @@ namespace App.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderEntity> builder)
         {
-            builder.Property(u => u.Id)
-               .ValueGeneratedOnAdd();
+            builder.HasKey(o => o.Id);
+            builder.Property(o => o.OrderCode).IsRequired().HasMaxLength(255); // Örnek olarak MaxLength ekledim.
+            builder.Property(o => o.Address).IsRequired().HasMaxLength(250);
+
+          
+        
         }
     }
 }

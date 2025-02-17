@@ -13,8 +13,7 @@ namespace App.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderItemEntity> builder)
         {
-            builder.Property(u => u.Id)
-               .ValueGeneratedOnAdd();
+           
         }
     }
 }

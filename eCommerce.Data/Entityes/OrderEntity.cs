@@ -23,5 +23,6 @@ namespace App.Data.Entityes
         public string Address { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public List<OrderItemEntity> OrderItems { get; set; }
     }
 }

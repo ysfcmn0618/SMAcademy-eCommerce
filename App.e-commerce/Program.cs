@@ -1,8 +1,14 @@
+using App.Data.ECommerceDbContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<ECommerceDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +29,13 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+using (var scope = app.Services.CreateScope())
+{
+    using (var dbContext = scope.ServiceProvider.GetRequiredService<ECommerceDbContext>())
+    {
+        await dbContext.Database.EnsureDeletedAsync();
+        await dbContext.Database.EnsureCreatedAsync();
+    }
+}
 
 app.Run();
