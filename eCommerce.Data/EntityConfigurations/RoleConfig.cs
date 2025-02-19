@@ -25,7 +25,7 @@ namespace App.Data.EntityConfigurations
             var roles = new List<Role>
 {
                 new Role { Id = 1, Name = "Admin", CreatedAt = DateTime.UtcNow },
-                new Role { Id = 2, Name = "User", CreatedAt = DateTime.UtcNow },
+                new Role { Id = 2, Name = "Buyer", CreatedAt = DateTime.UtcNow },
                 new Role { Id = 3, Name = "Seller", CreatedAt = DateTime.UtcNow }
 };
             builder.HasData(roles);
