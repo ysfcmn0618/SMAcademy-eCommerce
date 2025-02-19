@@ -9,12 +9,15 @@ using App.Data.Entityes;
 
 namespace App.Data.EntityConfigurations
 {
-    class ProductImageEntityConfig : IEntityTypeConfiguration<ProductImageEntity>
+    class CartItemConfig : IEntityTypeConfiguration<CartItem>
     {
-        public void Configure(EntityTypeBuilder<ProductImageEntity> builder)
+        public void Configure(EntityTypeBuilder<CartItem> builder)
         {
-            builder.Property(u => u.Id)
-               .ValueGeneratedOnAdd();
+            builder.HasOne<Cart>()
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.CardId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

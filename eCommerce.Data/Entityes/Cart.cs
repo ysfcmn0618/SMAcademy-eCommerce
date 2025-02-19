@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entityes
 {
-    public class SellerEntity:Person
+    public class Cart
     {
+        public int Id { get; set; }
+        public ICollection<CartItem> Items { get; set; }
     }
 }

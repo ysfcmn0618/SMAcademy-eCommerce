@@ -25,9 +25,11 @@ namespace App.Data.Entityes
         public string Password { get; set; }
         [ForeignKey(nameof(RoleId)), Required]
         public int RoleId { get; set; }
-        public RoleEntity Role { get; set; }
+        public Role Role { get; set; }
         [Required]
         public bool Enabled { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<Order> Orders { get; set; }
+        //public ICollection<Car>
     }
 }

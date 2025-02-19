@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entityes
 {
-    public class OrderItemEntity
+    public class OrderItem
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
         [ForeignKey(nameof(OrderId)), Required]
-        [JsonIgnore]
         public int OrderId { get; set; }
         [ForeignKey(nameof(ProductId)), Required]
         public int ProductId { get; set; }
-        public ProductEntity Product { get; set; }
+        public Product Product { get; set; }
         [MinLength(1), Required]
         public byte Quantity { get; set; }
         [DataType(DataType.Currency), Required]

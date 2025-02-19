@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entityes
 {
-    public class UserEntity: Person
+    public class User: Person
     {
     }
 }

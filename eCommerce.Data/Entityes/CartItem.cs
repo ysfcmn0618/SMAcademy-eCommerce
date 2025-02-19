@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entityes
 {
-    public class ProductImageEntity
+    public class CartItem
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity),Required]
         public int Id { get; set; }
-        [ForeignKey(nameof(ProductId)),Required]
+        [ForeignKey(nameof(UserId)),Required]
+        public int UserId { get; set; }
+        [ForeignKey(nameof(ProductId)), Required]
         public int ProductId { get; set; }
-        [DataType(DataType.Url), Required,MinLength(10),MaxLength(250)]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
-        public string Url { get; set; }
+        [ForeignKey(nameof(CardId)), Required]
+        public int CardId { get; set; }
+        [MinLength(1), Required]
+        public byte Quantity { get; set; }
         [Required]
-        public DateTime CreatedAt { get; set; }= DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

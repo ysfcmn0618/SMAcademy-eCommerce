@@ -9,11 +9,14 @@ using App.Data.Entityes;
 
 namespace App.Data.EntityConfigurations
 {
-    class OrderItemEntityConfig : IEntityTypeConfiguration<OrderItemEntity>
+    class OrderConfig : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<OrderItemEntity> builder)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
-           
+          builder.HasOne<Person>()
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
