@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using App.Data.Entityes;
+using App.Data.Entities;
 
 namespace App.Data.EntityConfigurations
 {

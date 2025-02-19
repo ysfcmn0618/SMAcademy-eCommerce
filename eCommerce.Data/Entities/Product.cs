@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace App.Data.Entityes
+namespace App.Data.Entities
 {
     public class Product
     {       

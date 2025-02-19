@@ -1,8 +1,8 @@
-﻿using App.Data.Entityes;
-using App.Data.EntityConfigurations;
+﻿using App.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using App.Data.Entities;
 
 namespace App.Data.ECommerceDbContext
 {
@@ -13,15 +13,14 @@ namespace App.Data.ECommerceDbContext
         }
 
         public DbSet<User> Users { get; set; }
-        //public DbSet<Seller> Sellers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Cart> Cart { get; set; }
+        public DbSet<Product> CartItems { get; set; }
+        //public DbSet<Cart> Cart { get; set; } // Cart classı silindiği için bu alanı sildik
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

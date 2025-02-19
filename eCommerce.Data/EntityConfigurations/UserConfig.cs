@@ -1,4 +1,4 @@
-﻿using App.Data.Entityes;
+﻿using App.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -15,11 +15,14 @@ namespace App.Data.EntityConfigurations
         {
             builder.HasMany(x => x.Products)
                 .WithOne()
-                .HasForeignKey(x => x.UserId)
+                .HasForeignKey(x => x.UserId);
+                //.OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne<Role>()
+                .WithMany()
+                .HasForeignKey(x => x.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
-            
 
 
             var sellers = new List<User>

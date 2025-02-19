@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace App.Data.Entityes
+namespace App.Data.Entities
 {
-    public class CartItem
+    public class OrderItem
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity),Required]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [ForeignKey(nameof(UserId)),Required]
-        public int UserId { get; set; }
+        [ForeignKey(nameof(OrderId)), Required]
+        public int OrderId { get; set; }
         [ForeignKey(nameof(ProductId)), Required]
         public int ProductId { get; set; }
-        [ForeignKey(nameof(CardId)), Required]
-        public int CardId { get; set; }
         [MinLength(1), Required]
         public byte Quantity { get; set; }
+        [DataType(DataType.Currency), Required]
+        public decimal UnitPrice { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

@@ -29,13 +29,13 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-using(var scope = app.Services.CreateScope())
-{
-    using (var dbContext = scope.ServiceProvider.GetRequiredService<ECommerceDbContext>())
-    {
-        await dbContext.Database.EnsureDeletedAsync();
-        await dbContext.Database.EnsureCreatedAsync();
-    }
-}
+//using(var scope = app.Services.CreateScope())
+//{
+//    using (var dbContext = scope.ServiceProvider.GetRequiredService<ECommerceDbContext>())
+//    {
+//        await dbContext.Database.EnsureDeletedAsync();
+//        await dbContext.Database.EnsureCreatedAsync();
+//    }
+//}
 
 app.Run();

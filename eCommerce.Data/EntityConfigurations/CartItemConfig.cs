@@ -5,19 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using App.Data.Entityes;
+using App.Data.Entities;
 
 namespace App.Data.EntityConfigurations
 {
-    class CartItemConfig : IEntityTypeConfiguration<CartItem>
+    class CartItemConfig : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<CartItem> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasOne<Cart>()
-                .WithMany(x => x.Items)
-                .HasForeignKey(x => x.CardId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne<Cart>() //Cart classı silindiği için bu alanı sildik
+            //    .WithMany(x => x.Items)
+            //    .HasForeignKey(x => x.CardId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
+            //builder.HasOne<Product>()
+            //    .WithOne<Product>()
+            //    .HasForeignKey(x=>x.ProductId);
+
+            //builder.HasOne<User>()
+            //    .WithMany()
+            //    .HasForeignKey(x => x.UserId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
