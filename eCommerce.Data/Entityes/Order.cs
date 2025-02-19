@@ -17,8 +17,6 @@ namespace App.Data.Entityes
         [ForeignKey(nameof(UserId)), Required]
         public int UserId { get; set; }
 
-        public Person User { get; set; }
-
         [MinLength(2), Required]
         [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string OrderCode { get; set; }

@@ -13,7 +13,7 @@ namespace App.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-          builder.HasOne<Person>()
+          builder.HasOne<User>()
                 .WithMany(x => x.Orders)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);

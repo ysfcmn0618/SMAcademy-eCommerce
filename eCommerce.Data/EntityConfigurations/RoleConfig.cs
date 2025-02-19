@@ -13,10 +13,22 @@ namespace App.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.Property(u => u.Name)
-               .HasMaxLength(10).IsRequired();
+
             builder.Property(x => x.CreatedAt)
                 .IsRequired().HasDefaultValue(DateTime.UtcNow);
+
+            //builder.HasOne<User>()
+            //    .WithOne(x => x.Role)
+            //    .HasForeignKey(x => x.RoleId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            var roles = new List<Role>
+{
+                new Role { Id = 1, Name = "Admin", CreatedAt = DateTime.UtcNow },
+                new Role { Id = 2, Name = "User", CreatedAt = DateTime.UtcNow },
+                new Role { Id = 3, Name = "Seller", CreatedAt = DateTime.UtcNow }
+};
+            builder.HasData(roles);
         }
     }
 }

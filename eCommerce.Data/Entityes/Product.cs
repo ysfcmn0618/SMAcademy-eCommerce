@@ -14,9 +14,9 @@ namespace App.Data.Entityes
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [ForeignKey(nameof(SellerId)), Required]
-        public int SellerId { get; set; }
-        public Seller SellerPerson { get; set; }
+        [ForeignKey(nameof(UserId)), Required]
+        public int UserId { get; set; }
+        //public User SellerPerson { get; set; }
 
         [ForeignKey(nameof(CategoryId)), Required]
         public int CategoryId { get; set; }
@@ -30,7 +30,7 @@ namespace App.Data.Entityes
 
         [MaxLength(1000)]
         [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
-        public string Details { get; set; }
+        public string? Details { get; set; }
 
         [Required]
         public ushort StockAmount { get; set; }

@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace App.Data.ECommerceDbContext
 {
-    public class ECommerceDbContext : IdentityDbContext<IdentityUser>
+    public class ECommerceDbContext : DbContext
     {
         public ECommerceDbContext(DbContextOptions<ECommerceDbContext> options) : base(options)
         {
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Seller> Sellers { get; set; }
+        //public DbSet<Seller> Sellers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
@@ -28,7 +28,7 @@ namespace App.Data.ECommerceDbContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserEntityConfig());
+            modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new RoleConfig());
             modelBuilder.ApplyConfiguration(new ProductImageConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());

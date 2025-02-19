@@ -18,7 +18,6 @@ namespace App.Data.Entityes
         public int OrderId { get; set; }
         [ForeignKey(nameof(ProductId)), Required]
         public int ProductId { get; set; }
-        public Product Product { get; set; }
         [MinLength(1), Required]
         public byte Quantity { get; set; }
         [DataType(DataType.Currency), Required]
