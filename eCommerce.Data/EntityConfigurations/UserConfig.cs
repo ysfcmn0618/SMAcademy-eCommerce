@@ -15,13 +15,13 @@ namespace App.Data.EntityConfigurations
         {
             builder.HasMany(x => x.Products)
                 .WithOne()
-                .HasForeignKey(x => x.UserId);
-                //.OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.SellerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne<Role>()
                 .WithMany()
                 .HasForeignKey(x => x.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
 
 

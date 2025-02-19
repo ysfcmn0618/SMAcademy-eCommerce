@@ -33,6 +33,6 @@ namespace App.Data.Entities
         public ICollection<Order>? Orders { get; set; }
         [JsonIgnore]
         public ICollection<Product>? Products { get; set; }
-        //public ICollection<Car>
+       // public ICollection<CartItem>? CartItems { get; set; }
     }
 }

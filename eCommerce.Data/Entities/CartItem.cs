@@ -12,8 +12,13 @@ namespace App.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [Required]
+        [Required]        
         public int UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; }
+        
+        [ForeignKey(nameof(ProductId))]
+        public Product Product { get; set; }
         [Required]
         public int ProductId { get; set; }
         [MinLength(1), Required]

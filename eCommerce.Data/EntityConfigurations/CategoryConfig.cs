@@ -23,7 +23,7 @@ namespace App.Data.EntityConfigurations
             builder.HasMany(c => c.ProductCategories)
                 .WithOne(pc => pc.Category)
                 .HasForeignKey(pc => pc.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             var categories = new List<Category>
         {

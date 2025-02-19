@@ -19,7 +19,7 @@ namespace App.Data.ECommerceDbContext
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Product> CartItems { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         //public DbSet<Cart> Cart { get; set; } // Cart classı silindiği için bu alanı sildik
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }

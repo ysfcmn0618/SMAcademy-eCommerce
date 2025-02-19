@@ -19,7 +19,7 @@ namespace App.Data.EntityConfigurations
             builder.HasMany<User>()
                 .WithOne(x => x.Role)
                 .HasForeignKey(x => x.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             var roles = new List<Role>
                     {

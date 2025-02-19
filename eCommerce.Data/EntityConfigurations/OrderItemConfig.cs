@@ -16,7 +16,7 @@ namespace App.Data.EntityConfigurations
            builder.HasOne<Order>()
                 .WithMany(x => x.OrderItems)
                 .HasForeignKey(x => x.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
            
         }
     }

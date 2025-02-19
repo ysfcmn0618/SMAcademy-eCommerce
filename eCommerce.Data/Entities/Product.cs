@@ -14,8 +14,8 @@ namespace App.Data.Entities
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [ForeignKey(nameof(UserId)), Required]
-        public int UserId { get; set; }
+        [ForeignKey(nameof(SellerId)), Required]
+        public int SellerId { get; set; }
         //public User SellerPerson { get; set; }
 
         [ForeignKey(nameof(CategoryId)), Required]

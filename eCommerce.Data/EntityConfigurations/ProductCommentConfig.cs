@@ -16,7 +16,7 @@ namespace App.Data.EntityConfigurations
            builder.HasOne<Product>()
                .WithMany(x => x.ProductComments)
                .HasForeignKey(x => x.ProductId)
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
