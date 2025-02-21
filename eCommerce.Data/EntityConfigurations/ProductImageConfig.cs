@@ -9,11 +9,22 @@ using App.Data.Entities;
 
 namespace App.Data.EntityConfigurations
 {
-    class ProductImageConfig : IEntityTypeConfiguration<ProductImage>
+    class ProductImageConfig : IEntityTypeConfiguration<ProductImageEntity>
     {
-        public void Configure(EntityTypeBuilder<ProductImage> builder)
+        public void Configure(EntityTypeBuilder<ProductImageEntity> builder)
         {
-            builder.HasOne<Product>()
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id)
+                .UseIdentityColumn()
+                .IsRequired();
+            builder.Property(x => x.Url)
+                .HasColumnType("nvarchar(255)")
+                .IsRequired();
+            builder.Property(x => x.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.HasOne<ProductEntity>()
                .WithMany(x => x.ProductImages)
                .HasForeignKey(x => x.ProductId)
                .OnDelete(DeleteBehavior.NoAction);

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-    public class Role
+    public class RoleEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
+        //[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [MinLength(2)]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
+        //[MinLength(2)]
+        //[RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
 

@@ -9,27 +9,19 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-    public class Product
+    public class ProductEntity
     {       
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [ForeignKey(nameof(SellerId)), Required]
         public int SellerId { get; set; }
         //public User SellerPerson { get; set; }
 
-        [ForeignKey(nameof(CategoryId)), Required]
         public int CategoryId { get; set; }
         //public CategoryEntity Category { get; set; }
-        [MinLength(2), MaxLength(100), Required]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string Name { get; set; }
 
-        [DataType(DataType.Currency), Required]
         public decimal Price { get; set; }
 
-        [MaxLength(1000)]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string? Details { get; set; }
 
         [Required]
@@ -40,9 +32,8 @@ namespace App.Data.Entities
 
         public bool Enabled { get; set; } = true;
 
-        public ICollection<ProductImage> ProductImages { get; set; }
-        public ICollection<ProductComment> ProductComments { get; set; }
-        [JsonIgnore]
-        public ICollection<ProductCategory> ProductCategories { get; set; }
+        public ICollection<ProductImageEntity> ProductImages { get; set; }
+        public ICollection<ProductCommentEntity> ProductComments { get; set; }
+        public ICollection<ProductCategoryEntity> ProductCategories { get; set; }
     }
 }

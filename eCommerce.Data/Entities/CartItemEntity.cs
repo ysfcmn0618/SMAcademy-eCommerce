@@ -8,22 +8,15 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-    public class CartItem
+    public class CartItemEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
-        [Required]        
         public int UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public User User { get; set; }
+        public UserEntity User { get; set; }
         
-        [ForeignKey(nameof(ProductId))]
-        public Product Product { get; set; }
-        [Required]
+        public ProductEntity Product { get; set; }
         public int ProductId { get; set; }
-        [MinLength(1), Required]
         public byte Quantity { get; set; }
-        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

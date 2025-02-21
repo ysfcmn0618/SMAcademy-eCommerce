@@ -9,9 +9,9 @@ using App.Data.Entities;
 
 namespace App.Data.EntityConfigurations
 {
-    class ProductCategoryConfig : IEntityTypeConfiguration<ProductCategory>
+    class ProductCategoryConfig : IEntityTypeConfiguration<ProductCategoryEntity>
     {
-        public void Configure(EntityTypeBuilder<ProductCategory> builder)
+        public void Configure(EntityTypeBuilder<ProductCategoryEntity> builder)
         {
             builder.HasKey(pc => new { pc.ProductId, pc.CategoryId });
 

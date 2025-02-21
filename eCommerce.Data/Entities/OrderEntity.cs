@@ -9,24 +9,17 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-    public class Order
+    public class OrderEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(UserId)), Required]
         public int UserId { get; set; }
 
-        [MinLength(2), Required]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string OrderCode { get; set; }
 
-        [MinLength(2), MaxLength(250), Required]
-        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string Address { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItemEntity> OrderItems { get; set; }
     }
 }

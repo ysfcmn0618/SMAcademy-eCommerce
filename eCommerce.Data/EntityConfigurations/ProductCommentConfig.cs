@@ -9,11 +9,34 @@ using App.Data.Entities;
 
 namespace App.Data.EntityConfigurations
 {
-    class ProductCommentConfig : IEntityTypeConfiguration<ProductComment>
+    class ProductCommentConfig : IEntityTypeConfiguration<ProductCommentEntity>
     {
-        public void Configure(EntityTypeBuilder<ProductComment> builder)
+        public void Configure(EntityTypeBuilder<ProductCommentEntity> builder)
         {
-           builder.HasOne<Product>()
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id)
+                .UseIdentityColumn()
+                .IsRequired();
+            builder.Property(x => x.Text)
+                .HasMaxLength(500)
+                .IsRequired();
+            builder.Property(x => x.StarCount)
+                .HasMaxLength(5)
+                .IsRequired();
+            builder.Property(x => x.IsConfirmed)
+                .HasDefaultValue(false)
+                .IsRequired();
+            builder.Property(x => x.CreatedAt)
+                .HasDefaultValueSql("GETUTCDATE()")
+                .IsRequired();
+
+
+            builder.HasOne<UserEntity>()
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne<ProductEntity>()
                .WithMany(x => x.ProductComments)
                .HasForeignKey(x => x.ProductId)
                .OnDelete(DeleteBehavior.NoAction);

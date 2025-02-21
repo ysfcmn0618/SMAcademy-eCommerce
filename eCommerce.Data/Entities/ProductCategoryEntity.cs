@@ -8,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-    public class ProductCategory
+    public class ProductCategoryEntity
     {
-        [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(ProductId)), Required]
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public ProductEntity Product { get; set; }
 
-        [ForeignKey(nameof(CategoryId)), Required]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public CategoryEntity Category { get; set; }
     }
 }

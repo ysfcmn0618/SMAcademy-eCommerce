@@ -12,17 +12,17 @@ namespace App.Data.ECommerceDbContext
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductComment> ProductComments { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ProductCommentEntity> ProductComments { get; set; }
+        public DbSet<ProductImageEntity> ProductImages { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderItemEntity> OrderItems { get; set; }
+        public DbSet<CartItemEntity> CartItems { get; set; }
         //public DbSet<Cart> Cart { get; set; } // Cart classı silindiği için bu alanı sildik
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
