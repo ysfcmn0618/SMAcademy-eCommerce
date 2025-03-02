@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Admin", "Admin\App.Admi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data", "eCommerce.Data\App.Data.csproj", "{5014CD5F-FC99-48C7-962E-840F97B28579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Data.Repository", "ECommerce.Repository\ECommerce.Data.Repository.csproj", "{BD48672F-87C8-4F0F-820F-722F048CF529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data.Repository", "ECommerce.Repository\App.Data.Repository.csproj", "{BD48672F-87C8-4F0F-820F-722F048CF529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
