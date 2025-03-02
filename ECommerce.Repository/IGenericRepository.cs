@@ -1,4 +1,4 @@
-﻿namespace ECommerce.Repository
+﻿namespace App.Data.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
