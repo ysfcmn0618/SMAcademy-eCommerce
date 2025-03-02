@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-     interface IRoleService
+    public interface IRoleService
     {
         Task<IEnumerable<RoleEntity>> GetAllRoles();
         Task<RoleEntity> GetRoleById(int id);

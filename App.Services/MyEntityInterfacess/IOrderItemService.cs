@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    interface IOrderItemService
+    public interface IOrderItemService
     {
         Task<IEnumerable<OrderItemEntity>> GetAllOrderItems();
         Task<OrderItemEntity> GetOrderItemById(int id);

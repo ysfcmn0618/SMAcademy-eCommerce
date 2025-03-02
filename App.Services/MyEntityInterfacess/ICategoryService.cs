@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    interface ICategoryService
+    public interface ICategoryService
     {
         Task<IEnumerable<CategoryEntity>> GetAllCategories();
         Task<CategoryEntity> GetCategoryById(int id);

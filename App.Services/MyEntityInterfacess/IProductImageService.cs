@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    interface IProductImageService
+    public interface IProductImageService
     {
         Task<IEnumerable<ProductImageEntity>> GetAllProductImages();
         Task<ProductImageEntity> GetProductImageById(int id);

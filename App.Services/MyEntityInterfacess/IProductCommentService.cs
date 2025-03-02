@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    interface IProductCommentService
+    public interface IProductCommentService
     {
         Task<IEnumerable<ProductCommentEntity>> GetAllProductComments();
         Task<ProductCommentEntity> GetProductCommentById(int id);

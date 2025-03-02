@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    class ProductService : IProductService
+    public class ProductService : IProductService
     {
         private readonly IGenericRepository<ProductEntity> _productRepository;
         public ProductService(IGenericRepository<ProductEntity> productRepository)

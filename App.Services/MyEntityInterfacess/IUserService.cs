@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-     interface IUserService
+     public interface IUserService
     {
         Task<IEnumerable<UserEntity>> GetAllUsers();
         Task<UserEntity> GetUserById(int id);

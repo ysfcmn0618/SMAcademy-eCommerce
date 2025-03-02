@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\App.Services\App.DbServices.csproj" />
     <ProjectReference Include="..\eCommerce.Data\App.Data.csproj" />
+    <ProjectReference Include="..\ECommerce.Repository\App.Data.Repository.csproj" />
   </ItemGroup>
 
 </Project>

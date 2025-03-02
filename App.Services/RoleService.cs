@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    class RoleService : IRoleService
+    public class RoleService : IRoleService
     {
         private readonly IGenericRepository<RoleEntity> _roleRepository;
 

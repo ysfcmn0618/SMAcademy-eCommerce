@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IGenericRepository<UserEntity> _userRepository;
 

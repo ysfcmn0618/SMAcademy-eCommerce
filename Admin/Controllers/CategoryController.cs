@@ -1,14 +1,15 @@
 ﻿using App.Data.MyDbContext;
+using App.DbServices.MyEntityInterfacess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ECommerceDbContext _dbContext;
-        public CategoryController(ECommerceDbContext dbContext)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            _dbContext = dbContext;
+            _categoryService = categoryService;
         }
         [Route("/categories")]
         [HttpGet]

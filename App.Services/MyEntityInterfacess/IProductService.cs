@@ -2,7 +2,7 @@
 
 namespace App.DbServices.MyEntityInterfacess
 {
-     interface IProductService
+     public interface IProductService
     {
         Task<IEnumerable<ProductEntity>> GetAllProducts();
         Task<ProductEntity> GetProductById(int id);

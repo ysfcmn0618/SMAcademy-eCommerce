@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Data.Repository
 {
-    class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ECommerceDbContext _dbContext;
         private readonly DbSet<T> _dbSet;

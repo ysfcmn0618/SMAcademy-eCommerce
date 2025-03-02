@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    class OrderItemService : IOrderItemService
+    public class OrderItemService : IOrderItemService
     {
         private readonly IGenericRepository<OrderItemEntity> _orderItemRepository;
         public OrderItemService(IGenericRepository<OrderItemEntity> orderItemRepository)
