@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
     public class OrderController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public OrderController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/order")]
         [HttpPost]
         //Sipariş Oluşturma

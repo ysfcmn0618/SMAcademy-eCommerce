@@ -1,10 +1,16 @@
 ﻿using App.Admin.Models.ViewModels;
+using App.Data.ECommerceDbContext;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public AuthController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/login")]
         [HttpGet]
         public IActionResult Login()

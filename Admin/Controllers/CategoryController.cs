@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public CategoryController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/categories")]
         [HttpGet]
         public IActionResult List()

@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public ProductController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/product")]
         [HttpGet]
         public IActionResult Create()

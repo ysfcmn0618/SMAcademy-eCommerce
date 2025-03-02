@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
     public class ProfileController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public ProfileController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/profile")]
         [HttpGet]
         public IActionResult Details()

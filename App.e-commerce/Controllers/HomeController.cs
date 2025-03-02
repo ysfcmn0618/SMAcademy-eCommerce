@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using App.Data.ECommerceDbContext;
 using App.eCommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,11 @@ namespace App.eCommerce.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public HomeController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         //Anasayfa
         public IActionResult Index()
         {

@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers
 {
     public class UserController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public UserController(ECommerceDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         [Route("/users")]
         [HttpGet]
         public IActionResult List()

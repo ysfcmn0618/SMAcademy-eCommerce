@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data.ECommerceDbContext;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
     public class CartController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+        public CartController(ECommerceDbContext dbcontext)
+        {
+            _dbContext= dbcontext;
+        }
         [Route("/add-to-cart/{productId:int}")]
         [HttpGet]
         public IActionResult AddProduct([FromRoute] int productId)

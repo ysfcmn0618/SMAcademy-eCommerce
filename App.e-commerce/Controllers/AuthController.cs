@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using App.eCommerce.Models.ViewModels;
+using App.Data.ECommerceDbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.eCommerce.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly ECommerceDbContext _dbContext;
+
+        public AuthController(ECommerceDbContext _db)
+        {
+            _dbContext = _db;
+        }
         [Route("/register")]
         [HttpGet]
         public IActionResult Register()
