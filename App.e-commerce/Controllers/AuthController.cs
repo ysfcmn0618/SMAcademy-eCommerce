@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using App.eCommerce.Models.ViewModels;
-using App.Data.ECommerceDbContext;
 using Microsoft.EntityFrameworkCore;
+using App.Data.MyDbContext;
 
 namespace App.eCommerce.Controllers
 {

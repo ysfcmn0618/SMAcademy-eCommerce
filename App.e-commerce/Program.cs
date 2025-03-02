@@ -1,4 +1,4 @@
-using App.Data.ECommerceDbContext;
+using App.Data.MyDbContext;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
