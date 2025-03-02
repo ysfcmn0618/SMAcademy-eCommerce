@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Data\App.Data.csproj" />
-    <ProjectReference Include="..\ECommerce.Repository\ECommerce.Data.Repository.csproj" />
+    <ProjectReference Include="..\ECommerce.Repository\App.Data.Repository.csproj" />
   </ItemGroup>
 
 </Project>
