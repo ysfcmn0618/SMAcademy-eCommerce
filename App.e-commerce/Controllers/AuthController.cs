@@ -64,7 +64,11 @@ namespace App.eCommerce.Controllers
         [HttpPost]
         public IActionResult ForgotPassword([FromForm] ForgotPasswordViewModel forgotPasswordMailModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [Route("renew-password/{verificationCode}")]
@@ -76,9 +80,13 @@ namespace App.eCommerce.Controllers
 
         [Route("renew-password")]
         [HttpPost]
-        public IActionResult RenewPassword([FromForm] object changePasswordModel)
+        public IActionResult RenewPassword([FromForm] RenevPasswordViewModel changePasswordModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [Route("logout")]

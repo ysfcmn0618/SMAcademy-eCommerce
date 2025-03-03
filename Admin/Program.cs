@@ -1,3 +1,4 @@
+using App.Admin.Mapping;
 using App.Data.MyDbContext;
 using App.Data.Repository;
 using App.DbServices;
@@ -22,7 +23,7 @@ builder.Services.AddDbContext<ECommerceDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
 }); 
-
+builder.Services.AddAutoMapper(typeof(AdminMappingProfile));
 
 
 var app = builder.Build();

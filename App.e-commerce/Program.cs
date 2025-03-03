@@ -3,6 +3,7 @@ using App.Data.Repository;
 using App.DbServices.MyEntityInterfacess;
 using App.DbServices;
 using Microsoft.EntityFrameworkCore;
+using App.eCommerce.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<ECommerceDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
 });
+builder.Services.AddAutoMapper(typeof(ECommerceMappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -6,6 +6,6 @@ namespace App.eCommerce.Models.ViewModels.AuthViewModels
     {
         [Required(ErrorMessage = "Bu alan boş bırakılamaz!"), DataType(DataType.EmailAddress)]
         [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
-        public string Email { get; set; }
+        public string Email { get; set; }=null!;
     }
 }
