@@ -1,2 +1,40 @@
 ﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // "Boşluk ile başlamaz" kuralı için özel doğrulama ekleyelim
+        $.validator.addMethod("noLeadingWhitespace", function (value, element) {
+            return this.optional(element) || !/^\s/.test(value);
+        }, "Bu alan boşluk ile başlamaz!");
+
+        // Şifre güçlü olmalı (en az 8 karakter, bir büyük harf ve bir rakam içermeli)
+        $.validator.addMethod("passwordStrength", function (value) {
+            return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value);
+        }, "Şifre en az 8 karakter, bir büyük harf ve bir rakam içermelidir.");
+
+        // Özel hata mesajlarını özelleştirme
+        $.extend($.validator.messages, {
+            required: "Bu alan boş bırakılamaz!",
+            email: "Geçerli bir e-posta adresi giriniz!",
+            minlength: $.validator.format("En az {2} karakter girmelisiniz!")
+        });
+
+        // Doğrulama kurallarını belirli alanlara uygula
+        $("input[name='Name'], input[name='Surname']").rules("add", { noLeadingWhitespace: true });
+        $("input[name='Password']").rules("add", { passwordStrength: true });
+
+        // Form gönderildiğinde tüm inputları kontrol et
+        $("form").on("submit", function () {
+            $(this).find(":input").trigger("blur"); // Tüm inputları kontrol et
+
+            // Form geçersizse ilk hataya kaydır
+            if (!$(this).valid()) {
+                $("html, body").animate({
+                    scrollTop: $(".text-danger:visible:first").offset().top - 100
+                }, 500);
+                return false; // Gönderimi engelle
+            }
+        });
+    });
+</script>

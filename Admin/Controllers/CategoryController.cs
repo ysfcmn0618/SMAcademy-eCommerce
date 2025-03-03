@@ -1,6 +1,7 @@
 ﻿using App.Data.MyDbContext;
 using App.DbServices.MyEntityInterfacess;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace App.Admin.Controllers
 {
@@ -13,22 +14,25 @@ namespace App.Admin.Controllers
         }
         [Route("/categories")]
         [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            var categories = await _categoryService.GetAllCategories();
+            return View(categories);
         }
 
         [Route("/categories/create")]
         [HttpGet]
         public IActionResult Create()
         {
+
             return View();
         }
 
         [Route("/categories/create")]
         [HttpPost]
-        public IActionResult Create([FromForm] object newCategoryModel)
+        public async Task<IActionResult> Create([FromForm] object newCategoryModel)
         {
+           //await _categoryService.AddCategory(newCategoryModel);
             return View();
         }
 
