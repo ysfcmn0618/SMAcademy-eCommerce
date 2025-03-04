@@ -45,17 +45,26 @@
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
-                    <ul>
-                        <li class="nav-item @(ViewData["ActivePage"]?.ToString() == "Index" ? "active" : "")"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li class="nav-item @(ViewData["ActivePage"]?.ToString() == "Listing" ? "active" : "")"><a asp-controller="Home" asp-action="Listing">Product List</a></li>
-                        <li>
+                    <ul class="d-flex justify-content-center align-items-center flex-nowrap ">
+                        <li class="@(ViewData["ActivePage"]?.ToString() == "Index" ? "active" : "")">
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="@(ViewData["ActivePage"]?.ToString() == "Listing" ? "active" : "")">
+                            <a asp-controller="Home" asp-action="Listing">ProductList</a>
+                        </li>
+                        <li class="position-relative">
                             <a href="#">Pages</a>
-                            <ul class="header__menu__dropdown">
-                                <li ><a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="1">Product Details</a></li>
-                                <li ><a asp-controller="Cart" asp-action="Edit">Shoping Cart</a></li>
+                            <ul class="header__menu__dropdown position-absolute">
+                                <li><a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="1">Product Details</a></li>
+                                <li><a asp-controller="Cart" asp-action="Edit">Shopping Cart</a></li>
                             </ul>
                         </li>
-                        <li class="@(ViewData["ActivePage"]?.ToString() == "Contact" ? "active" : "")"><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li class="@(ViewData["ActivePage"]?.ToString() == "AboutUs" ? "active" : "")">
+                            <a asp-controller="Home" asp-action="AboutUs">AboutUs</a>
+                        </li>
+                        <li class="@(ViewData["ActivePage"]?.ToString() == "Contact" ? "active" : "")">
+                            <a asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
