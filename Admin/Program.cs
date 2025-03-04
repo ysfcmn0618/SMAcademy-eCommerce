@@ -3,6 +3,8 @@ using App.Data.MyDbContext;
 using App.Data.Repository;
 using App.DbServices;
 using App.DbServices.MyEntityInterfacess;
+using App.Logging;
+using App.Logging.LoggerService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +26,11 @@ builder.Services.AddDbContext<ECommerceDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
 }); 
 builder.Services.AddAutoMapper(typeof(AdminMappingProfile));
-
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddConsole();
+});
+builder.Services.AddSingleton<ILoggerService, LoggerService>();
 
 var app = builder.Build();
 

@@ -4,6 +4,8 @@ using App.DbServices.MyEntityInterfacess;
 using App.DbServices;
 using Microsoft.EntityFrameworkCore;
 using App.eCommerce.Mapping;
+using App.Logging;
+using App.Logging.LoggerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,11 @@ builder.Services.AddDbContext<ECommerceDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
 });
 builder.Services.AddAutoMapper(typeof(ECommerceMappingProfile));
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddConsole();
+});
+builder.Services.AddSingleton<ILoggerService, LoggerService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
