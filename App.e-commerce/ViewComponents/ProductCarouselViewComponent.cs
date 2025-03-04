@@ -14,11 +14,11 @@ namespace App.eCommerce.ViewComponents
         {
             return Task.FromResult(new List<Product>
            {
-               new Product{Id=1,Img="img/categories/cat-1.jpg",Name="Drink Fruits"},
-                    new Product{Id=2,Img="img/categories/cat-2.jpg",Name="Dried Fruits"},
-                    new Product{Id=3,Img="img/categories/cat-3.jpg",Name="Fresh Fruits"},
-                    new Product{Id=4,Img="img/categories/cat-4.jpg",Name="Vegetables"},
-                    new Product{Id=5,Img="img/categories/cat-5.jpg",Name="Bla bla Fruits"},
+               new Product{Id=1,Img="theme/img/categories/cat-1.jpg",Name="Drink Fruits"},
+                    new Product{Id=2,Img="theme/img/categories/cat-2.jpg",Name="Dried Fruits"},
+                    new Product{Id=3,Img="theme/img/categories/cat-3.jpg",Name="Fresh Fruits"},
+                    new Product{Id=4,Img="theme/img/categories/cat-4.jpg",Name="Vegetables"},
+                    new Product{Id=5,Img="theme/img/categories/cat-5.jpg",Name="Bla bla Fruits"},
            });
         }
     }
