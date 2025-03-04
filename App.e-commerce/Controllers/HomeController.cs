@@ -15,16 +15,22 @@ namespace App.eCommerce.Controllers
         //Anasayfa
         public IActionResult Index()
         {
+            ViewData["ActivePage"] = "Index";
             return View();
         }
         [Route("/about-us")]
         //Hakkımızda
-        public IActionResult AboutUs() { return View(); }
+        public IActionResult AboutUs()
+        {
+            ViewData["ActivePage"] = "AboutUs";
+            return View();
+        }
         //İletişim
         [Route("/contact")]
         [HttpGet]
         public IActionResult Contact()
         {
+            ViewData["ActivePage"] = "Contact";
             return View();
         }
 
@@ -32,6 +38,7 @@ namespace App.eCommerce.Controllers
         [HttpPost]
         public IActionResult Contact([FromForm] object newContactMessageModel)
         {
+            ViewData["ActivePage"] = "Contact";
             return View();
         }
 
@@ -39,6 +46,7 @@ namespace App.eCommerce.Controllers
         [HttpGet]
         public IActionResult Listing()
         {
+            ViewData["ActivePage"] = "Listing";
             return View();
         }
 
@@ -46,6 +54,7 @@ namespace App.eCommerce.Controllers
         [HttpGet]
         public IActionResult ProductDetail([FromRoute] int productId)
         {
+            ViewData["ActivePage"] = "ProductDetail";
             return View();
         }
 
