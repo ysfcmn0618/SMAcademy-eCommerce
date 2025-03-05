@@ -1,20 +1,29 @@
-﻿using App.Data.MyDbContext;
+﻿using App.Admin.Models.ProductViewModels;
+using App.Data.MyDbContext;
+using App.DbServices.MyEntityInterfacess;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace App.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ECommerceDbContext _dbContext;
-        public ProductController(ECommerceDbContext dbContext)
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
+
+        public ProductController(IProductService productService,IMapper mapper)
         {
-            _dbContext = dbContext;
+            _productService = productService;
+            _mapper= mapper;
         }
         [Route("/products/")]
         [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            var products=await _productService.GetAllProducts();
+
+            return View(_mapper.Map<IEnumerable<ProductModel>>(products));
         }
 
         [Route("/products/filter")]
@@ -27,9 +36,25 @@ namespace App.Admin.Controllers
 
         [Route("/products/{productId:int}/delete")]
         [HttpGet]
-        public IActionResult Delete([FromRoute] int productId)
+        public async Task<IActionResult> Delete([FromRoute] int productId)
         {
-            return View();
+            await _productService.DeleteProduct(productId);
+            return RedirectToAction(nameof(List),"Product");
         }
+        [Route("/products/{productId:int}/edit")]
+        [HttpGet]
+        public async Task<IActionResult> Edit([FromRoute] int productId)
+        {
+            var product = await _productService.GetProductById(productId);
+            return View(_mapper.Map<ProductEditModel>(product));
+        }
+        [Route("/products/{productId:int}/edit")]
+        [HttpPost]
+        public IActionResult Edit([FromRoute] int productId, [FromForm] ProductEditModel product)
+        {
+
+            return View(product);
+        }
+
     }
 }

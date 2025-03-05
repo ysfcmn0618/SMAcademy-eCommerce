@@ -1,0 +1,113 @@
+﻿@using App.Admin.Models.ProductViewModels
+@model ProductEditModel
+
+@{
+    ViewData["Title"] = "Ürün Düzenle";
+}
+
+<h2>Ürün Düzenle</h2>
+
+<form asp-action="Edit" asp-controller="Product" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Ürün Adı</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Fiyat</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StockAmount" class="form-label">Stok Miktarı</label>
+        <input asp-for="StockAmount" class="form-control" />
+        <span asp-validation-for="StockAmount" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Details" class="form-label">Açıklamalar</label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+
+    <!-- ProductImages -->
+    <div class="mb-3">
+        <label class="form-label">Ürün Resimleri</label>
+        <div id="productImagesContainer">
+            @foreach (var image in Model.ProductImages)
+            {
+                <div class="image-container mb-2" data-image-id="@image.Id">
+                    <img src="@image.Url" alt="Product Image" class="img-thumbnail" width="100" />
+                    <button type="button" class="btn btn-danger btn-sm delete-image">Resmi Sil</button>
+                </div>
+            }
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Resim Yükle</label>
+            <input type="file" name="ProductImages" class="form-control-file" />
+            <span class="text-danger">@ViewData["ImageErrorMessage"]</span>
+        </div>
+    </div>
+
+    <!-- ProductComments -->
+    <div class="mb-3">
+        <label class="form-label">Ürün Yorumları</label>
+        <div id="commentsContainer">
+            @foreach (var comment in Model.ProductComments)
+            {
+                <div class="comment mb-2">
+                    <p><strong>User ID @comment.UserId:</strong> @comment.Text</p>
+                </div>
+            }
+        </div>
+        <button type="button" class="btn btn-info btn-sm" id="toggleComments">Yorumları Görüntüle</button>
+    </div>
+
+    <!-- ProductCategories -->
+   @*  <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Kategori</label>
+        <select asp-for="CategoryId" class="form-control">
+            @foreach (var category in ViewData["Categories"] as IEnumerable<SelectListItem>)
+            {
+                <option value="@category.Value"
+                @(category.Value == Model.CategoryId.ToString() ? "selected" : "")>
+                    @category.Text
+                </option>
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div> *@
+
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-action="List" asp-controller="Product" class="btn btn-secondary">İptal</a>
+</form>
+
+@section Scripts {
+    <script>
+        // Resimleri silme işlemi
+        document.querySelectorAll('.delete-image').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var imageContainer = this.closest('.image-container');
+                imageContainer.remove(); // Resim silindi
+            });
+        });
+
+        // Yorumları toggle etme
+        document.getElementById('toggleComments').addEventListener('click', function () {
+            var commentsContainer = document.getElementById('commentsContainer');
+            if (commentsContainer.style.display === 'none') {
+                commentsContainer.style.display = 'block';
+                this.innerText = 'Yorumları Gizle';
+            } else {
+                commentsContainer.style.display = 'none';
+                this.innerText = 'Yorumları Görüntüle';
+            }
+        });
+    </script>
+}
