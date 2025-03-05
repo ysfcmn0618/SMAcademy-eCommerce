@@ -19,6 +19,6 @@ namespace App.Data.Entities
         // Eğer bire-çok ilişki kullanıyorsan (Products varsa)
         //[JsonIgnore]
         //public List<ProductEntity>? Products { get; set; }
-        public ICollection<ProductCategoryEntity> ProductCategories { get; set; }
+        public ICollection<ProductCategoryEntity> ?ProductCategories { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using App.DbServices;
 using Microsoft.EntityFrameworkCore;
 using App.eCommerce.Mapping;
 using App.Logging;
-using App.Logging.LoggerService;
 
 var builder = WebApplication.CreateBuilder(args);
 

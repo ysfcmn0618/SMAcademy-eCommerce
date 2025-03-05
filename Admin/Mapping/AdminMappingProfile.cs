@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using App.Admin.Models.CategoryViewModels;
+using App.Data.Entities;
+using AutoMapper;
+
 
 namespace App.Admin.Mapping
 {
@@ -6,7 +9,10 @@ namespace App.Admin.Mapping
     {
         public AdminMappingProfile()
         {
-            
+           CreateMap<CategoryModel, CategoryEntity>().ForMember(dest => dest.Id, opt => opt.Ignore()) 
+            .ReverseMap();
+            //CreateMap<CategoryEntity, CategoryEditModel>().ReverseMap().ForMember(dest => dest.Id, opt => opt.Ignore());
+            //CreateMap<IEnumerable<CategoryEntity>, IEnumerable<CategoryListModel>>().ReverseMap();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace App.Logging.LoggerService
+namespace App.Logging
 {
     public class LoggerService:ILoggerService
     {

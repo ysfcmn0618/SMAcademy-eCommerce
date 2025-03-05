@@ -4,7 +4,6 @@ using App.Data.Repository;
 using App.DbServices;
 using App.DbServices.MyEntityInterfacess;
 using App.Logging;
-using App.Logging.LoggerService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
