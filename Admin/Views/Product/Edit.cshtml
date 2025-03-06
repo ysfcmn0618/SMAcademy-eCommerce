@@ -9,7 +9,8 @@
 
 <form asp-action="Edit" asp-controller="Product" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
-
+    <input type="hidden" asp-for="SellerId" />
+    <input type="hidden" asp-for="CategoryId" />
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Ürün Adı</label>
         <input asp-for="Name" class="form-control" />
@@ -33,9 +34,13 @@
         <textarea asp-for="Details" class="form-control"></textarea>
         <span asp-validation-for="Details" class="text-danger"></span>
     </div>
-
-    <!-- ProductImages -->
     <div class="mb-3">
+        <label for="CreatedAt" class="form-label">Oluşturma Tarihi</label>
+        <input asp-for="CreatedAt" class="form-control" disabled="disabled" />
+        <span asp-validation-for="CreatedAt" class="text-danger"></span>
+    </div>
+    <!-- ProductImages -->
+   @*  <div class="mb-3">
         <label class="form-label">Ürün Resimleri</label>
         <div id="productImagesContainer">
             @foreach (var image in Model.ProductImages)
@@ -51,10 +56,10 @@
             <input type="file" name="ProductImages" class="form-control-file" />
             <span class="text-danger">@ViewData["ImageErrorMessage"]</span>
         </div>
-    </div>
+    </div> *@
 
     <!-- ProductComments -->
-    <div class="mb-3">
+   @*  <div class="mb-3">
         <label class="form-label">Ürün Yorumları</label>
         <div id="commentsContainer">
             @foreach (var comment in Model.ProductComments)
@@ -65,7 +70,7 @@
             }
         </div>
         <button type="button" class="btn btn-info btn-sm" id="toggleComments">Yorumları Görüntüle</button>
-    </div>
+    </div> *@
 
     <!-- ProductCategories -->
    @*  <div class="mb-3">
@@ -88,7 +93,7 @@
     <a asp-action="List" asp-controller="Product" class="btn btn-secondary">İptal</a>
 </form>
 
-@section Scripts {
+@* @section Scripts {
     <script>
         // Resimleri silme işlemi
         document.querySelectorAll('.delete-image').forEach(function (button) {
@@ -110,4 +115,4 @@
             }
         });
     </script>
-}
+} *@

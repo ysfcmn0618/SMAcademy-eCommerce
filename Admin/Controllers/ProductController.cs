@@ -1,5 +1,7 @@
 ﻿using App.Admin.Models.ProductViewModels;
+using App.Data.Entities;
 using App.Data.MyDbContext;
+using App.DbServices;
 using App.DbServices.MyEntityInterfacess;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -50,10 +52,20 @@ namespace App.Admin.Controllers
         }
         [Route("/products/{productId:int}/edit")]
         [HttpPost]
-        public IActionResult Edit([FromRoute] int productId, [FromForm] ProductEditModel product)
+        public async Task<IActionResult> Edit([FromRoute] int productId, [FromForm] ProductEditModel product)
         {
-
-            return View(product);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var existingProduct = await _productService.GetProductById(productId);
+            if (existingProduct is null)
+            {
+                return NotFound();
+            }
+            var productEntity = _mapper.Map<ProductEntity>(product);
+            await _productService.UpdateProduct(productEntity);
+            return RedirectToAction(nameof(List),"Product");
         }
 
     }

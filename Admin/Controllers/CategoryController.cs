@@ -71,7 +71,7 @@ namespace App.Admin.Controllers
             }
             var updatedCategory = _mapper.Map(editCategoryModel, category);
             await _categoryService.UpdateCategory(updatedCategory);
-            return View(editCategoryModel);
+            return RedirectToAction(nameof(List),"Category");
         }
 
         [Route("/categories/{categoryId:int}/delete")]

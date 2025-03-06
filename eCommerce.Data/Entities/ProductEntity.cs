@@ -29,9 +29,10 @@ namespace App.Data.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool Enabled { get; set; } = true;
-
-        public ICollection<ProductImageEntity> ProductImages { get; set; }
-        public ICollection<ProductCommentEntity> ProductComments { get; set; }
-        public ICollection<ProductCategoryEntity> ProductCategories { get; set; }
+        //[Timestamp] // EF Core tarafından otomatik olarak yönetilir
+        //public byte[] RowVersion { get; set; }
+        public ICollection<ProductImageEntity> ?ProductImages { get; set; }
+        public ICollection<ProductCommentEntity> ?ProductComments { get; set; }
+        public ICollection<ProductCategoryEntity> ?ProductCategories { get; set; }
     }
 }

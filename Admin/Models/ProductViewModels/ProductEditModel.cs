@@ -26,12 +26,13 @@ namespace App.Admin.Models.ProductViewModels
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool Enabled { get; set; } = true;
-        [JsonIgnore]
-        public ICollection<ProductImageEntity> ProductImages { get; set; }
-        [JsonIgnore]
-        public ICollection<ProductCommentEntity> ProductComments { get; set; }
-        [JsonIgnore]
-        public ICollection<ProductCategoryEntity> ProductCategories { get; set; }
+        
+        //[JsonIgnore]
+        //public ICollection<ProductImageEntity> ProductImages { get; set; }
+        //[JsonIgnore]
+        //public ICollection<ProductCommentEntity> ProductComments { get; set; }
+        //[JsonIgnore]
+        //public ICollection<ProductCategoryEntity> ProductCategories { get; set; }
     }
 }
 
