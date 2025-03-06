@@ -20,8 +20,4 @@
     <ProjectReference Include="..\ECommerce.Repository\App.Data.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\HomeViewModels\" />
-  </ItemGroup>
-
 </Project>

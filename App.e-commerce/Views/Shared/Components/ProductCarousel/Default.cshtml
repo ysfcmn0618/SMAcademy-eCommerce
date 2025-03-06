@@ -1,11 +1,31 @@
 ﻿
-<div class="categories__slider owl-carousel">
-    @foreach (var category in Model)
+@* <div class="categories__slider owl-carousel">
+    @foreach (var product in Model)
     {
         <div class="col-lg-3">
-            <div class="categories__item set-bg" data-setbg="@category.Img">
-                <h5><a href="#">@category.Name</a></h5>
+            @* <div class="categories__item set-bg" data-setbg="@product.Img"> *@
+@*             <div class="categories__item">
+                <img src="@product.ImageUrl" alt="@product.Name" class="product-image">
+                <h5><a href="#">@product.Name</a></h5>
+                <p>@product.Price.ToString("C")</p>
             </div>
         </div>
+    }
+</div> *@ 
+<div class="categories__slider owl-carousel">
+    @{
+        var index = 1;
+    }
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 item">
+            @* Her ürün bir slider item olarak işaretlendi *@
+            <div class="categories__item">
+                <img src="@(string.IsNullOrEmpty(product.Img) ? $"theme/img/categories/cat-{index}.jpg" : product.Img)"
+                     alt="@product.Name"
+                     class="product-image">
+                <h5><a href="#">@product.Name <p>@product.Price.ToString("C")</p></a></h5>
+            </div>
+        </div> @(index++)
     }
 </div>

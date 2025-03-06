@@ -1,31 +1,46 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.DbServices.MyEntityInterfacess;
+using App.eCommerce.Models.ViewModels.HomeViewModels;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.ViewComponents
 {
     public class ProductCarouselViewComponent : ViewComponent
     {
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
+
+        public ProductCarouselViewComponent(IProductService productService,IMapper mapper)
+        {
+            _productService= productService;
+            _mapper= mapper;
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var products = await GetProductsAsync();
             return View(products);
         }
 
-        private Task<List<Product>> GetProductsAsync()
+        private async Task<List<ProductViewComponentModel>> GetProductsAsync()
         {
-            return Task.FromResult(new List<Product>
-           {
-               new Product{Id=1,Img="theme/img/categories/cat-1.jpg",Name="Drink Fruits"},
-                    new Product{Id=2,Img="theme/img/categories/cat-2.jpg",Name="Dried Fruits"},
-                    new Product{Id=3,Img="theme/img/categories/cat-3.jpg",Name="Fresh Fruits"},
-                    new Product{Id=4,Img="theme/img/categories/cat-4.jpg",Name="Vegetables"},
-                    new Product{Id=5,Img="theme/img/categories/cat-5.jpg",Name="Bla bla Fruits"},
-           });
+            var products = await _productService.GetAllProducts();
+           var productList= products.OrderByDescending(p=>p.CreatedAt).Take(5);
+            var mappintProductList = _mapper.Map<IEnumerable<ProductViewComponentModel>>(productList);
+
+            return mappintProductList.ToList();
+
+            // return Task.FromResult(new List<ProductViewComponentModel>
+            //{
+            //    new ProductViewComponentModel{Id=1,Img="theme/img/categories/cat-1.jpg",Name="Drink Fruits"},
+            //         new ProductViewComponentModel{Id=2,Img="theme/img/categories/cat-2.jpg",Name="Dried Fruits"},
+            //         new ProductViewComponentModel{Id=3,Img="theme/img/categories/cat-3.jpg",Name="Fresh Fruits"},
+            //         new ProductViewComponentModel{Id=4,Img="theme/img/categories/cat-4.jpg",Name="Vegetables"},
+            //         new ProductViewComponentModel{Id=5,Img="theme/img/categories/cat-5.jpg",Name="Bla bla Fruits"},
+            //});
         }
     }
     public class Product
     {
-        public int Id { get; set; }
-        public string Img { get; set; }
-        public string Name { get; set; }
+      
     }
 }
