@@ -50,7 +50,7 @@ namespace App.eCommerce.Controllers
         public IActionResult Comment([FromRoute] int productId, [FromForm] object newProductCommentModel)
         {
             // save product comment...
-
+            //mevcut admin paylaşılan görev de comment ayrı bir controller gibi çalısıyor 
             return RedirectToAction(nameof(HomeController.ProductDetail), "Home", new { productId });
         }
     }

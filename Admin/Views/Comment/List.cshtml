@@ -1,4 +1,6 @@
-﻿@{
+﻿@using App.Admin.Models.CommentViewModel
+@model List<CommentViewModel>
+@{
     ViewBag.Title = "Product Comments";
 }
 
@@ -13,30 +15,47 @@
         </tr>
     </thead>
     <tbody>
+        @foreach (var comment in Model)
+        {
             <tr>
-                <td><i>Ürün çok güzel, çeyizime aldım.</i></td>
-                <td>Merve Yılmaz</td>
+                <td>@comment.Text</td>
+                <td>@comment.UserId</td> <!-- Kullanıcı adını almak için UserId yerine UserName kullanılabilir -->
                 <td>
-                    <button class="btn btn-primary" onclick="approveComment(1)">Approve</button>
+                    @if (!comment.IsConfirmed)
+                    {
+                        <button class="btn btn-primary" onclick="approveComment(@comment.Id)">Approve</button>
+                    }
+                    else
+                    {
+                        <span class="text-success">Approved</span>
+                    }
                 </td>
             </tr>
+        }
     </tbody>
 </table>
+<script>
+   
+</script>
 
 @section scripts {
     <script>
-        function approveComment(commentId) {
-            // Make a fetch request to the server to approve the comment
-
-            fetch(`/comment/${commentId}/approve`)
-                .then(response => response.json())
-                .then(data => {
-                    // Refresh the page to update the approved status
+               function approveComment(commentId) {
+            fetch(`/comment/${commentId}/approve`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(response => {
+                if (response.ok) {
                     location.reload();
-                })
-                .catch(error => {
-                    alert('Yorum onaylanamadı...');
-                });
+                } else {
+                    alert('Yorum onaylanırken hata oluştu!');
+                }
+            }).catch(error => {
+                alert('Yorum onaylanamadı: ' + error.message);
+            });
         }
     </script>
 }

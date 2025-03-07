@@ -1,4 +1,5 @@
 ﻿using App.Admin.Models.CategoryViewModels;
+using App.Admin.Models.CommentViewModel;
 using App.Admin.Models.ProductViewModels;
 using App.Data.Entities;
 using AutoMapper;
@@ -19,6 +20,10 @@ namespace App.Admin.Mapping
             CreateMap<ProductEntity, ProductEditModel>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<ProductCommentEntity, CommentViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
         }
     }
 }
