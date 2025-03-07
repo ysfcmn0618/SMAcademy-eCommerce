@@ -14,10 +14,8 @@ namespace App.Data.Entities
 
         public int Id { get; set; }
         public int SellerId { get; set; }
-        //public User SellerPerson { get; set; }
-
         public int CategoryId { get; set; }
-        //public CategoryEntity Category { get; set; }
+        
         public string Name { get; set; }
 
         public decimal Price { get; set; }
@@ -29,8 +27,9 @@ namespace App.Data.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool Enabled { get; set; } = true;
-        //[Timestamp] // EF Core tarafından otomatik olarak yönetilir
-        //public byte[] RowVersion { get; set; }
+
+        //public UserEntity Seller { get; set; }
+        //public CategoryEntity Category { get; set; }
         public ICollection<ProductImageEntity> ?ProductImages { get; set; }
         public ICollection<ProductCommentEntity> ?ProductComments { get; set; }
         public ICollection<ProductCategoryEntity> ?ProductCategories { get; set; }

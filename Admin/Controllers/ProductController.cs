@@ -58,11 +58,11 @@ namespace App.Admin.Controllers
             {
                 return View();
             }
-            var existingProduct = await _productService.GetProductById(productId);
-            if (existingProduct is null)
-            {
-                return NotFound();
-            }
+            //var existingProduct = await _productService.GetProductById(productId);
+            //if (existingProduct is null)
+            //{
+            //    return NotFound();
+            //}
             var productEntity = _mapper.Map<ProductEntity>(product);
             await _productService.UpdateProduct(productEntity);
             return RedirectToAction(nameof(List),"Product");

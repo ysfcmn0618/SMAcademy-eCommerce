@@ -31,7 +31,7 @@ namespace App.Admin.Controllers
         public async Task<IActionResult> Approve([FromRoute] int commentId)
         {
             var comment = await _dbContext.GetProductCommentById(commentId);
-            comment.IsConfirmed = true;
+            comment.IsConfirmed = false;
             await _dbContext.UpdateProductComment(comment);
 
             return RedirectToAction(nameof(List));

@@ -12,17 +12,13 @@ namespace App.Admin.Mapping
         public AdminMappingProfile()
         {
             CreateMap<CategoryModel, CategoryEntity>()
-                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                  .ReverseMap();
             CreateMap<ProductEntity, ProductModel>()
-                .ReverseMap()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                .ReverseMap();
             CreateMap<ProductEntity, ProductEditModel>()
-                .ReverseMap()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                .ReverseMap();
             CreateMap<ProductCommentEntity, CommentViewModel>()
-                .ReverseMap()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                .ReverseMap();
 
         }
     }
