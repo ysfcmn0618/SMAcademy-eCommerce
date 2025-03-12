@@ -15,7 +15,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddScoped<IProductCommentService, ProductCommentService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
 // Add services to the container.

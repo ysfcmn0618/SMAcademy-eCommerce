@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace App.Data.Entities
+namespace App.Data.Entities;
+
+public class CategoryEntity : EntityBase
 {
-    public class CategoryEntity
+    public string Name { get; set; } = null!;
+    public string Color { get; set; } = null!;
+    public string IconCssClass { get; set; } = null!;
+}
+
+internal class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEntity>
+{
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Color { get; set; }
-        public string IconCssClass { get; set; }        
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        // Eğer bire-çok ilişki kullanıyorsan (Products varsa)
-        //[JsonIgnore]
-        //public List<ProductEntity>? Products { get; set; }
-        public ICollection<ProductCategoryEntity> ?ProductCategories { get; set; }
+        builder.HasKey(e => e.Id);
+        builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
+        builder.Property(e => e.Color).IsRequired().HasMaxLength(6);
+        builder.Property(e => e.IconCssClass).IsRequired().HasMaxLength(50);
+        builder.Property(e => e.CreatedAt).IsRequired();
     }
 }

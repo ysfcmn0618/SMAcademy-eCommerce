@@ -33,8 +33,8 @@ namespace App.Data.Repository
                 await _dbContext.SaveChangesAsync();
                 return entity;
             }
-            return entity;
-            
+            throw new KeyNotFoundException($"Entity {typeof(T).Name} with ID {id} not found.");
+
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -43,8 +43,13 @@ namespace App.Data.Repository
         }
 
         public async Task<T> GetById(int id)
-        {           
-            return await _dbSet.FindAsync(id);
+        {
+            var entity = await _dbSet.FindAsync(id);
+            if (entity is not null)
+            {
+                return entity;
+            }
+            throw new KeyNotFoundException($"Entity {typeof(T).Name} with ID {id} not found.");
         }
 
         public async Task<T> Update(T entity)

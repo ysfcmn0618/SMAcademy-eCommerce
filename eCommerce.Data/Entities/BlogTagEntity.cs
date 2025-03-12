@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Data.Entities;
 
-public class RoleEntity : EntityBase
+public class BlogTagEntity : EntityBase
 {
     public string Name { get; set; } = null!;
 }
 
-internal class RoleEntityConfiguration : IEntityTypeConfiguration<RoleEntity>
+internal class BlogTagEntityConfiguration : IEntityTypeConfiguration<BlogTagEntity>
 {
-    public void Configure(EntityTypeBuilder<RoleEntity> builder)
+    public void Configure(EntityTypeBuilder<BlogTagEntity> builder)
     {
         builder.HasKey(e => e.Id);
-        builder.Property(e => e.Name).IsRequired().HasMaxLength(10);
+        builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
         builder.Property(e => e.CreatedAt).IsRequired();
     }
 }

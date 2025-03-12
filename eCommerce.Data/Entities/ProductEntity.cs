@@ -1,37 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace App.Data.Entities
+namespace App.Data.Entities;
+
+public class ProductEntity : EntityBase, IHasEnabled
 {
-    public class ProductEntity
-    {       
+    public int SellerId { get; set; }
+    public int CategoryId { get; set; }
+    public int? DiscountId { get; set; }
+    public string Name { get; set; } = null!;
+    public decimal Price { get; set; }
+    public string Description { get; set; } = null!;
+    public byte StockAmount { get; set; }
+    public bool Enabled { get; set; } = true;
 
-        public int Id { get; set; }
-        public int SellerId { get; set; }
-        public int CategoryId { get; set; }
-        
-        public string Name { get; set; }
+    // Navigation properties
+    public UserEntity Seller { get; set; } = null!;
+    public CategoryEntity Category { get; set; } = null!;
+    public DiscountEntity? Discount { get; set; }
 
-        public decimal Price { get; set; }
+    public ICollection<ProductImageEntity> Images { get; set; } = null!;
+    public ICollection<ProductCommentEntity> Comments { get; set; } = null!;
+}
 
-        public string? Details { get; set; }
+internal class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
+{
+    public void Configure(EntityTypeBuilder<ProductEntity> builder)
+    {
+        builder.HasKey(e => e.Id);
+        builder.Property(e => e.SellerId).IsRequired();
+        builder.Property(e => e.CategoryId).IsRequired();
+        builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
+        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(18,2)");
+        builder.Property(e => e.Description).HasMaxLength(1000);
+        builder.Property(e => e.StockAmount).IsRequired();
+        builder.Property(e => e.CreatedAt).IsRequired();
+        builder.Property(e => e.Enabled).IsRequired().HasDefaultValue(true);
 
-        public ushort StockAmount { get; set; }
+        builder.HasOne(d => d.Seller)
+            .WithMany()
+            .HasForeignKey(d => d.SellerId)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public bool Enabled { get; set; } = true;
-
-        //public UserEntity Seller { get; set; }
-        //public CategoryEntity Category { get; set; }
-        public ICollection<ProductImageEntity> ?ProductImages { get; set; }
-        public ICollection<ProductCommentEntity> ?ProductComments { get; set; }
-        public ICollection<ProductCategoryEntity> ?ProductCategories { get; set; }
+        builder.HasOne(d => d.Category)
+            .WithMany()
+            .HasForeignKey(d => d.CategoryId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
