@@ -15,12 +15,12 @@ public class ProductEntity : EntityBase, IHasEnabled
     public bool Enabled { get; set; } = true;
 
     // Navigation properties
-    public UserEntity Seller { get; set; } = null!;
-    public CategoryEntity Category { get; set; } = null!;
-    public DiscountEntity? Discount { get; set; }
+    public virtual UserEntity Seller { get; set; } = null!;
+    public virtual CategoryEntity Category { get; set; } = null!;
+    public virtual DiscountEntity? Discount { get; set; }
 
-    public ICollection<ProductImageEntity> Images { get; set; } = null!;
-    public ICollection<ProductCommentEntity> Comments { get; set; } = null!;
+    public virtual ICollection<ProductImageEntity> Images { get; set; } = null!;
+    public virtual ICollection<ProductCommentEntity> Comments { get; set; } = null!;
 }
 
 internal class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>

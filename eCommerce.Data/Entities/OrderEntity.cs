@@ -10,7 +10,7 @@ public class OrderEntity : EntityBase
     public string Address { get; set; } = null!;
 
     // Navigation properties
-    public UserEntity User { get; set; } = null!;
+    public virtual UserEntity User { get; set; } = null!;
 }
 
 internal class OrderEntityConfiguration : IEntityTypeConfiguration<OrderEntity>

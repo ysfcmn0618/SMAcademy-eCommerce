@@ -10,8 +10,8 @@ public class CartItemEntity : EntityBase
     public byte Quantity { get; set; }
 
     // Navigation properties
-    public UserEntity User { get; set; } = null!;
-    public ProductEntity Product { get; set; } = null!;
+    public virtual UserEntity User { get; set; } = null!;
+    public virtual ProductEntity Product { get; set; } = null!;
 }
 
 internal class CartItemEntityConfiguration : IEntityTypeConfiguration<CartItemEntity>

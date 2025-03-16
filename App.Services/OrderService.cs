@@ -40,5 +40,12 @@ namespace App.DbServices
         {
             await _orderRepository.Update(orderItem);
         }
+        public async Task<IEnumerable<OrderEntity?>> GetOrderWithDetailsAsync()
+        {
+            return await _orderRepository.GetAllIncludingAsync(
+                p => p.User
+            );
+        }
+
     }
 }

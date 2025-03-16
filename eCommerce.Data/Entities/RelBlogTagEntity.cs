@@ -9,8 +9,8 @@ public class RelBlogTagEntity : EntityBase
     public int TagId { get; set; }
 
     // Navigation properties
-    public BlogEntity Blog { get; set; } = null!;
-    public BlogTagEntity Tag { get; set; } = null!;
+    public virtual BlogEntity Blog { get; set; } = null!;
+    public virtual BlogTagEntity Tag { get; set; } = null!;
 }
 
 internal class RelBlogTagEntityConfiguration : IEntityTypeConfiguration<RelBlogTagEntity>

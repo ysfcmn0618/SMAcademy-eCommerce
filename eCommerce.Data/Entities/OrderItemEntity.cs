@@ -10,8 +10,8 @@ public class OrderItemEntity : EntityBase
     public decimal UnitPrice { get; set; }
 
     // Navigation properties
-    public OrderEntity Order { get; set; } = null!;
-    public ProductEntity Product { get; set; } = null!;
+    public virtual OrderEntity Order { get; set; } = null!;
+    public virtual ProductEntity Product { get; set; } = null!;
 }
 
 internal class OrderItemEntityConfiguration : IEntityTypeConfiguration<OrderItemEntity>

@@ -12,7 +12,7 @@ public class BlogCommentEntity : EntityBase
     public bool IsApproved { get; set; }
 
     // Navigation properties
-    public BlogEntity Blog { get; set; } = null!;
+    public virtual BlogEntity Blog { get; set; } = null!;
 }
 
 internal class BlogCommentEntityConfiguration : IEntityTypeConfiguration<BlogCommentEntity>

@@ -9,7 +9,7 @@ public class ProductImageEntity : EntityBase
     public string Url { get; set; } = null!;
 
     // Navigation properties
-    public ProductEntity Product { get; set; } = null!;
+    public virtual ProductEntity Product { get; set; } = null!;
 }
 
 internal class ProductImageEntityConfiguration : IEntityTypeConfiguration<ProductImageEntity>

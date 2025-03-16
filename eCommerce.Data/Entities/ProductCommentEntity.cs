@@ -12,8 +12,8 @@ public class ProductCommentEntity : EntityBase
     public bool IsConfirmed { get; set; } = false;
 
     // Navigation properties
-    public ProductEntity Product { get; set; } = null!;
-    public UserEntity User { get; set; } = null!;
+    public virtual ProductEntity Product { get; set; } = null!;
+    public virtual UserEntity User { get; set; } = null!;
 }
 
 internal class ProductCommentEntityConfiguration : IEntityTypeConfiguration<ProductCommentEntity>

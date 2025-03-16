@@ -40,5 +40,27 @@ namespace App.DbServices
         {
             await _productRepository.Update(product);
         }
+        public async Task<IEnumerable<ProductEntity?>> GetProductsWithDetailsAsync()
+        {
+            return await _productRepository.GetAllIncludingAsync(
+                p => p.Category,           // Kategori bilgilerini de al
+                p => p.Seller,        // Satıcı detaylarını da al
+                p => p.Discount,         //indirim detaylarını da al 
+                p=> p.Images,
+                p=>p.Comments
+            );
+        }
+
+        public async Task<ProductEntity?> GetProductByIdWithDetailsAsync(int id)
+        {
+            return await _productRepository.GetByIdIncludingAsync(
+                id,
+                p => p.Category,           // Kategori bilgilerini de al
+                p => p.Seller,        // Satıcı detaylarını da al
+                p => p.Discount,         //indirim detaylarını da al 
+                p => p.Images,
+                p => p.Comments
+            );
+        }
     }
 }

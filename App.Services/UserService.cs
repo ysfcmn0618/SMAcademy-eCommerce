@@ -41,5 +41,11 @@ namespace App.DbServices
         {
             await _userRepository.Update(user);
         }
+        public async Task<IEnumerable<UserEntity?>> GetUserWithDetailsAsync()
+        {
+            return await _userRepository.GetAllIncludingAsync(
+                p => p.Role
+            );
+        }
     }
 }

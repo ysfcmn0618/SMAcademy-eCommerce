@@ -9,8 +9,8 @@ public class RelBlogCategoryEntity : EntityBase
     public int CategoryId { get; set; }
 
     // Navigation properties
-    public BlogEntity Blog { get; set; } = null!;
-    public BlogCategoryEntity Category { get; set; } = null!;
+    public virtual BlogEntity Blog { get; set; } = null!;
+    public virtual BlogCategoryEntity Category { get; set; } = null!;
 }
 
 internal class RelBlogCategoryEntityConfiguration : IEntityTypeConfiguration<RelBlogCategoryEntity>

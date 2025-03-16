@@ -12,9 +12,9 @@ public class BlogEntity : EntityBase, IHasEnabled
     public bool Enabled { get; set; } = true;
 
     // Navigation properties
-    public UserEntity User { get; set; } = null!;
+    public virtual UserEntity User { get; set; } = null!;
 
-    public ICollection<BlogCommentEntity> Comments { get; set; } = null!;
+    public virtual ICollection<BlogCommentEntity> Comments { get; set; } = null!;
 }
 
 internal class BlogEntityConfiguration : IEntityTypeConfiguration<BlogEntity>

@@ -13,7 +13,7 @@ public class UserEntity : EntityBase, IHasEnabled
     public bool Enabled { get; set; } = true;
 
     // Navigation properties
-    public RoleEntity Role { get; set; } = null!;
+    public virtual RoleEntity Role { get; set; } = null!;
 }
 
 internal class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
