@@ -32,6 +32,13 @@ namespace App.eCommerce.Mapping
                 .ReverseMap();
             //CreateMap<ProductEntity, CategorySliderViewModel>().ReverseMap();
             CreateMap<ProductEntity, FeaturedProductViewModel>().ReverseMap();
+            CreateMap<ProductEntity, FeaturedProductViewModel>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src =>
+                     src.Category != null ? src.Category.Name : "Uncategorized")) // Kategori adı eşleme
+                .ForMember(dest => dest.DiscountPercentage, opt => opt.MapFrom(src =>
+                src.Discount != null ? (byte?)src.Discount.DiscountRate : null)) // İndirim oranı eşleme
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src =>
+                     src.Images != null && src.Images.Any() ? src.Images.First().Url : "default-image.jpg")); // İlk resim eşleme
 
             //CategoryEntity Mapping
             CreateMap<CategoryEntity, CategoryListViewModel>().ReverseMap();
