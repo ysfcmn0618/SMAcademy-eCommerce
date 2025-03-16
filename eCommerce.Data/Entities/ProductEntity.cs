@@ -17,7 +17,7 @@ public class ProductEntity : EntityBase, IHasEnabled
     // Navigation properties
     public virtual UserEntity Seller { get; set; } = null!;
     public virtual CategoryEntity Category { get; set; } = null!;
-    public virtual DiscountEntity? Discount { get; set; }
+    public virtual DiscountEntity Discount { get; set; } = null!;
 
     public virtual ICollection<ProductImageEntity> Images { get; set; } = null!;
     public virtual ICollection<ProductCommentEntity> Comments { get; set; } = null!;

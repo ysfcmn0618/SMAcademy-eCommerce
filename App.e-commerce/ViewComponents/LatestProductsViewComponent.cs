@@ -1,5 +1,7 @@
-﻿using App.Data.Contexts;
-using App.Eticaret.Models.ViewModels;
+﻿using App.Data.Entities;
+using App.DbServices.MyEntityInterfacess;
+using App.eCommerce.Models.ViewModels.ProductViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,32 +9,26 @@ namespace App.Eticaret.ViewComponents
 {
     public class LatestProductsViewComponent : ViewComponent
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly BaseDbService<ProductEntity> _dbContext;
+        private readonly IMapper _mapper;
 
-        public LatestProductsViewComponent(ApplicationDbContext context)
+        public LatestProductsViewComponent(BaseDbService<ProductEntity> context,IMapper mapper)
         {
             _dbContext = context;
+            _mapper = mapper;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            var itemsProduct = await _dbContext.GetAll();
             var viewModel = new OwlCarouselViewModel
             {
                 Title = "Latest Products",
-                Items = await _dbContext.Products
+                Items = itemsProduct
                     .Where(p => p.Enabled)
                     .OrderByDescending(p => p.CreatedAt)
                     .Take(6)
-                    .Select(p => new ProductListingViewModel
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        Price = p.Price,
-                        CategoryName = p.Category.Name,
-                        DiscountPercentage = p.Discount == null ? null : p.Discount.DiscountRate,
-                        ImageUrl = p.Images.Count != 0 ? p.Images.First().Url : null
-                    })
-                    .ToListAsync()
+                    .Select(p => _mapper.Map<ProductListingViewModel>(p)).ToList()
             };
 
             return View(viewModel);

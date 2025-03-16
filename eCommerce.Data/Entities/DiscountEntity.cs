@@ -5,7 +5,7 @@ namespace App.Data.Entities
 {
     public class DiscountEntity : EntityBase, IHasEnabled
     {
-        public byte DiscountRate { get; set; }
+        public byte DiscountRate { get; set; } = 0;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Enabled { get; set; } = true;

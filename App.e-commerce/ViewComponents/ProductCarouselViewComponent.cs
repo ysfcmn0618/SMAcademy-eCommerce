@@ -1,4 +1,5 @@
-﻿using App.DbServices.MyEntityInterfacess;
+﻿using App.Data.Entities;
+using App.DbServices.MyEntityInterfacess;
 using App.eCommerce.Models.ViewModels.HomeViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,10 @@ namespace App.eCommerce.ViewComponents
 {
     public class ProductCarouselViewComponent : ViewComponent
     {
-        private readonly IProductService _productService;
+        private readonly BaseDbService<ProductEntity> _productService;
         private readonly IMapper _mapper;
 
-        public ProductCarouselViewComponent(IProductService productService,IMapper mapper)
+        public ProductCarouselViewComponent(BaseDbService<ProductEntity> productService,IMapper mapper)
         {
             _productService= productService;
             _mapper= mapper;
@@ -23,7 +24,7 @@ namespace App.eCommerce.ViewComponents
 
         private async Task<List<ProductViewComponentModel>> GetProductsAsync()
         {
-            var products = await _productService.GetAllProducts();
+            var products = await _productService.GetAll();
            var productList= products.OrderByDescending(p=>p.CreatedAt).Take(5);
             var mappintProductList = _mapper.Map<IEnumerable<ProductViewComponentModel>>(productList);
 
@@ -38,9 +39,5 @@ namespace App.eCommerce.ViewComponents
             //         new ProductViewComponentModel{Id=5,Img="theme/img/categories/cat-5.jpg",Name="Bla bla Fruits"},
             //});
         }
-    }
-    public class Product
-    {
-      
-    }
+    }  
 }

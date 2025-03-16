@@ -1,5 +1,6 @@
 ﻿using App.Data.Entities;
 using App.DbServices.MyEntityInterfacess;
+using App.eCommerce.Models.ViewModels.CategoryViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,14 +26,7 @@ namespace App.Eticaret.ViewComponents
 
             var categories = products
                 .GroupBy(p => p.CategoryId)
-                .Select(g => new CategorySliderViewModel
-                {
-                    Id = g.First().Category.Id,
-                    Name = g.First().Category.Name,
-                    Color = g.First().Category.Color,
-                    IconCssClass = g.First().Category.IconCssClass,
-                    ImageUrl = g.First().Images.Any() ? g.First().Images.First().Url : null
-                })
+                .Select(g => _mapper.Map<CategorySliderViewModel>(g.First()))
                 .ToList();
 
             return View(categories);

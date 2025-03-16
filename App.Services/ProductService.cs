@@ -12,18 +12,18 @@ namespace App.DbServices
     public class ProductService : BaseDbService<ProductEntity>
     {
         private readonly IGenericRepository<ProductEntity> _productRepository;
-        public ProductService(IGenericRepository<ProductEntity> productRepository):base(productRepository)
+        public ProductService(IGenericRepository<ProductEntity> productRepository) : base(productRepository)
         {
             _productRepository = productRepository;
-        }      
+        }
         public async Task<IEnumerable<ProductEntity?>> GetProductsWithDetailsAsync()
         {
             return await _productRepository.GetAllIncludingAsync(
                 p => p.Category,           // Kategori bilgilerini de al
                 p => p.Seller,        // Satıcı detaylarını da al
                 p => p.Discount,         //indirim detaylarını da al 
-                p=> p.Images,
-                p=>p.Comments
+                p => p.Images,
+                p => p.Comments
             );
         }
 
