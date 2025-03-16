@@ -16,6 +16,7 @@ namespace App.Extensions
 
             // Db Services
             services.AddScoped(typeof(IBaseServiceInterface<>), typeof(BaseDbService<>));
+            services.AddScoped(typeof(BaseDbService<>));
             services.AddScoped<ProductService>();
             services.AddScoped<UserService>();
             services.AddScoped<OrderItemService>();

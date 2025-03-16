@@ -30,7 +30,7 @@ namespace App.Data.MyDbContext
         public DbSet<RelBlogCategoryEntity> RelBlogCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            DbSeeder.Seed(modelBuilder);
+            //DbSeeder.Seed(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new RoleEntityConfiguration());

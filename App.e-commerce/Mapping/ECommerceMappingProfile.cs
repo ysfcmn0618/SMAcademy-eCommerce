@@ -21,19 +21,16 @@ namespace App.eCommerce.Mapping
             CreateMap<RenevPasswordViewModel, UserEntity>();
 
             //ProductEntity Mapping
-            CreateMap<ProductEntity, ProductViewComponentModel>().ReverseMap();
+            CreateMap<ProductEntity, ProductViewComponentModel>()
+                .ForMember(dest => dest.Img, opt => opt.MapFrom(src =>
+                src.Images.Any() ? src.Images.First().Url : "theme/img/categories/cat-1.jpg")) // Eğer resim yoksa varsayılan bir görsel kullanın.
+                .ReverseMap();
             CreateMap<ProductEntity, ProductListingViewModel>()
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.DiscountPercentage, opt => opt.MapFrom(src => src.Discount != null ? src.Discount.DiscountRate : (decimal?)null))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Images.Any() ? src.Images.First().Url : null))
                 .ReverseMap();
-            CreateMap<ProductEntity, CategorySliderViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Category.Id))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Category.Name))
-                .ForMember(dest => dest.Color, opt => opt.MapFrom(src => src.Category.Color))
-                .ForMember(dest => dest.IconCssClass, opt => opt.MapFrom(src => src.Category.IconCssClass))
-                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Images.Any() ? src.Images.First().Url : null))
-                .ReverseMap();
+            //CreateMap<ProductEntity, CategorySliderViewModel>().ReverseMap();
             CreateMap<ProductEntity, FeaturedProductViewModel>().ReverseMap();
 
             //CategoryEntity Mapping
