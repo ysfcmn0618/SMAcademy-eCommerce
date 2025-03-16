@@ -69,21 +69,16 @@ namespace App.Data.Repository
             return await query.ToListAsync();
         }
 
-        public virtual async Task<T?> GetByIdIncludingAsync(int id, params Expression<Func<T, object>>[] includes)
+        public async Task<T?> GetByIdIncludingAsync(int id, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
+
             foreach (var include in includes)
             {
                 query = query.Include(include);
             }
-            var entity = await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
 
-            if (entity == null)
-            {
-                return null;
-            }
-
-            return entity;
+            return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
         }
     }
 }

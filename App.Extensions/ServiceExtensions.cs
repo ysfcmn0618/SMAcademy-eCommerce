@@ -1,4 +1,5 @@
-﻿using App.Data.Repository;
+﻿using App.Data.Entities;
+using App.Data.Repository;
 using App.DbServices;
 using App.DbServices.MyEntityInterfacess;
 using App.Logging;
@@ -14,24 +15,12 @@ namespace App.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             // Db Services
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ICartItemService, CartItemService>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IOrderItemService, OrderItemService>();
-            services.AddScoped<IOrderService, OrderService>();
-            services.AddScoped<IProductCommentService, ProductCommentService>();
-            services.AddScoped<IProductImageService, ProductImageService>();
-            services.AddScoped<IBlogCategoryService,BlogCategoryService>();
-            services.AddScoped<IBlogCommentService,BlogCommentService>();
-            services.AddScoped<IBlogService,BlogService>();
-            services.AddScoped<IBlogTagService,BlogTagService>();
-            services.AddScoped<IContactFormService, ContactFormService>();
-            services.AddScoped<IDiscountService,DiscountService>();
-            services.AddScoped<IRelBlogCategoryService, RelBlogCategoryService>();
-            services.AddScoped<IRelBlogTagService, RelBlogTagService>();
-
+            services.AddScoped(typeof(IBaseServiceInterface<>), typeof(BaseDbService<>));
+            services.AddScoped<ProductService>();
+            services.AddScoped<UserService>();
+            services.AddScoped<OrderItemService>();
+            services.AddScoped<OrderService>();
+           
             // Logger Service
             services.AddSingleton<ILoggerService, LoggerService>();
         }

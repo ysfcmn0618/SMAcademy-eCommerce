@@ -9,37 +9,14 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    public class OrderService : IOrderService
+    public class OrderService : BaseDbService<OrderEntity>
     {
         private readonly IGenericRepository<OrderEntity> _orderRepository;
-        public OrderService(IGenericRepository<OrderEntity> orderRepository)
+        public OrderService(IGenericRepository<OrderEntity> orderRepository):base(orderRepository)
         {
             _orderRepository = orderRepository;
         }
-        public async Task AddOrder(OrderEntity orderItem)
-        {
-            await _orderRepository.Add(orderItem);
-        }
-
-        public async Task DeleteOrder(int id)
-        {
-            await _orderRepository.Delete(id);
-        }
-
-        public async Task<IEnumerable<OrderEntity>> GetAllOrders()
-        {
-            return await _orderRepository.GetAll();
-        }
-
-        public async Task<OrderEntity> GetOrderById(int id)
-        {
-            return await _orderRepository.GetById(id);
-        }
-
-        public async Task UpdateOrder(OrderEntity orderItem)
-        {
-            await _orderRepository.Update(orderItem);
-        }
+       
         public async Task<IEnumerable<OrderEntity?>> GetOrderWithDetailsAsync()
         {
             return await _orderRepository.GetAllIncludingAsync(

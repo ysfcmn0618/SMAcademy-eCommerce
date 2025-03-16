@@ -9,38 +9,15 @@ using System.Threading.Tasks;
 
 namespace App.DbServices
 {
-    public class UserService : IUserService
+    public class UserService : BaseDbService<UserEntity>
     {
         private readonly IGenericRepository<UserEntity> _userRepository;
 
-        public UserService(IGenericRepository<UserEntity> userRepository)
+        public UserService(IGenericRepository<UserEntity> userRepository):base (userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task AddUser(UserEntity user)
-        {
-            await _userRepository.Add(user);
-        }
-
-        public async Task DeleteUser(int id)
-        {
-            await _userRepository.Delete(id);
-        }
-
-        public async Task<IEnumerable<UserEntity>> GetAllUsers()
-        {
-            return await _userRepository.GetAll();
-        }
-
-        public async Task<UserEntity> GetUserById(int id)
-        {
-            return await _userRepository.GetById(id);
-        }
-
-        public async Task UpdateUser(UserEntity user)
-        {
-            await _userRepository.Update(user);
-        }
+       
         public async Task<IEnumerable<UserEntity?>> GetUserWithDetailsAsync()
         {
             return await _userRepository.GetAllIncludingAsync(

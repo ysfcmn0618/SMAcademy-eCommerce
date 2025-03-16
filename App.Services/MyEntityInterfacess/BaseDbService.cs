@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,5 +39,17 @@ namespace App.DbServices.MyEntityInterfacess
         {
             await _repository.Update(updateEntity);
         }
+        // Eager Loading - Tüm verileri ilişkileriyle birlikte getir
+        public async Task<IEnumerable<T>> GetAllIncludingAsync(params Expression<Func<T, object>>[] includes)
+        {
+            return await _repository.GetAllIncludingAsync(includes);
+        }
+
+        // Eager Loading - ID'ye göre tek bir veriyi ilişkileriyle birlikte getir
+        public async Task<T?> GetByIdIncludingAsync(int id, params Expression<Func<T, object>>[] includes)
+        {
+            return await _repository.GetByIdIncludingAsync(id, includes);
+        }
+
     }
 }
