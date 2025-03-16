@@ -1,4 +1,4 @@
-﻿namespace App.Eticaret.ViewComponents
+﻿namespace App.eCommerce.Models.ViewModels.CategoryViewModels
 {
     internal class CategorySliderViewModel
     {

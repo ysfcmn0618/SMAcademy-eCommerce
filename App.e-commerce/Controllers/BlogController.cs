@@ -1,13 +1,14 @@
-﻿using App.DbServices.MyEntityInterfacess;
+﻿using App.Data.Entities;
+using App.DbServices.MyEntityInterfacess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly IBlogService _dbContext;
+        private readonly BaseDbService<BlogEntity> _dbContext;
 
-        public BlogController(IBlogService dbContext)
+        public BlogController(BaseDbService<BlogEntity> dbContext)
         {
             _dbContext = dbContext;
         }

@@ -11,10 +11,10 @@ namespace App.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
+        private readonly BaseDbService<ProductEntity> _productService;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService,IMapper mapper)
+        public ProductController(BaseDbService<ProductEntity> productService,IMapper mapper)
         {
             _productService = productService;
             _mapper= mapper;
@@ -23,7 +23,7 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var products=await _productService.GetAllProducts();
+            var products=await _productService.GetAll();
 
             return View(_mapper.Map<IEnumerable<ProductModel>>(products));
         }
@@ -40,14 +40,14 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete([FromRoute] int productId)
         {
-            await _productService.DeleteProduct(productId);
+            await _productService.Delete(productId);
             return RedirectToAction(nameof(List),"Product");
         }
         [Route("/products/{productId:int}/edit")]
         [HttpGet]
         public async Task<IActionResult> Edit([FromRoute] int productId)
         {
-            var product = await _productService.GetProductById(productId);
+            var product = await _productService.GetById(productId);
             return View(_mapper.Map<ProductEditModel>(product));
         }
         [Route("/products/{productId:int}/edit")]
@@ -64,7 +64,7 @@ namespace App.Admin.Controllers
             //    return NotFound();
             //}
             var productEntity = _mapper.Map<ProductEntity>(product);
-            await _productService.UpdateProduct(productEntity);
+            await _productService.Update(productEntity);
             return RedirectToAction(nameof(List),"Product");
         }
 

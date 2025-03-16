@@ -1,4 +1,6 @@
 ﻿using App.Data.Contexts;
+using App.Data.Entities;
+using App.DbServices.MyEntityInterfacess;
 using App.Eticaret.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +9,15 @@ namespace App.Eticaret.ViewComponents
 {
     public class FeaturedProductsViewComponent : ViewComponent
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly BaseDbService<ProductEntity> _dbContext;
 
-        public FeaturedProductsViewComponent(ApplicationDbContext context)
+        public FeaturedProductsViewComponent(BaseDbService<ProductEntity> context)
         {
             _dbContext = context;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var products = await _dbContext.Products
+            var products = await _dbContext.
                 .Where(p => p.Enabled)
                 .Select(p => new FeaturedProductViewModel
                 {

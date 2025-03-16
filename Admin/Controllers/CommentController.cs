@@ -1,4 +1,5 @@
 ﻿using App.Admin.Models.CommentViewModel;
+using App.Data.Entities;
 using App.Data.MyDbContext;
 using App.DbServices.MyEntityInterfacess;
 using AutoMapper;
@@ -9,10 +10,10 @@ namespace App.Admin.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly IProductCommentService _dbContext;
+        private readonly BaseDbService<ProductCommentEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public CommentController(IProductCommentService productCommentService, IMapper mapper)
+        public CommentController(BaseDbService<ProductCommentEntity> productCommentService, IMapper mapper)
         {
             _dbContext = productCommentService;
             _mapper = mapper;
@@ -21,7 +22,7 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var commentList = await _dbContext.GetAllProductComments();
+            var commentList = await _dbContext.GetAll();
             var mappingList = _mapper.Map<IEnumerable<CommentViewModel>>(commentList);
             return View(mappingList);
         }
@@ -30,9 +31,9 @@ namespace App.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Approve([FromRoute] int commentId)
         {
-            var comment = await _dbContext.GetProductCommentById(commentId);
+            var comment = await _dbContext.GetById(commentId);
             comment.IsConfirmed = false;
-            await _dbContext.UpdateProductComment(comment);
+            await _dbContext.Update(comment);
 
             return RedirectToAction(nameof(List));
         }

@@ -11,10 +11,10 @@ namespace App.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryService _categoryService;
+        private readonly BaseDbService<CategoryEntity> _categoryService;
         private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService, IMapper mappingProfile)
+        public CategoryController(BaseDbService<CategoryEntity> categoryService, IMapper mappingProfile)
         {
             _categoryService = categoryService;
             _mapper = mappingProfile;
@@ -23,7 +23,7 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var categories = await _categoryService.GetAllCategories();
+            var categories = await _categoryService.GetAll();
 
             return View(_mapper.Map<IEnumerable<CategoryModel>>(categories));
         }
@@ -44,7 +44,7 @@ namespace App.Admin.Controllers
                 return View();
             }
             var category = _mapper.Map<CategoryEntity>(newCategoryModel);
-            await _categoryService.AddCategory(category);
+            await _categoryService.Add(category);
             return RedirectToAction(nameof(List), "Category");
         }
 
@@ -52,7 +52,7 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit([FromRoute] int categoryId)
         {
-            var category = await _categoryService.GetCategoryById(categoryId);
+            var category = await _categoryService.GetById(categoryId);
             return View(_mapper.Map<CategoryModel>(category));
         }
 
@@ -64,21 +64,21 @@ namespace App.Admin.Controllers
             {
                 return View();
             }
-            var category = await _categoryService.GetCategoryById(categoryId);
+            var category = await _categoryService.GetById(categoryId);
             if (category is null)
             {
                 return NotFound();
             }
             var updatedCategory = _mapper.Map(editCategoryModel, category);
-            await _categoryService.UpdateCategory(updatedCategory);
-            return RedirectToAction(nameof(List),"Category");
+            await _categoryService.Update(updatedCategory);
+            return RedirectToAction(nameof(List), "Category");
         }
 
         [Route("/categories/{categoryId:int}/delete")]
         [HttpGet]
         public async Task<IActionResult> Delete([FromRoute] int categoryId)
         {
-            await _categoryService.DeleteCategory(categoryId);
+            await _categoryService.Delete(categoryId);
             return RedirectToAction(nameof(List), "Category");
         }
     }
