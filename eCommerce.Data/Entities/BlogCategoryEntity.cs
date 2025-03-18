@@ -7,6 +7,8 @@ namespace App.Data.Entities;
 public class BlogCategoryEntity : EntityBase
 {
     public string Name { get; set; } = null!;
+    // Navigation properties
+    public ICollection<RelBlogCategoryEntity> BlogRelations { get; set; } = [];
 }
 
 internal class BlogCategoryEntityConfiguration : IEntityTypeConfiguration<BlogCategoryEntity>
@@ -16,6 +18,7 @@ internal class BlogCategoryEntityConfiguration : IEntityTypeConfiguration<BlogCa
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
         builder.Property(e => e.CreatedAt).IsRequired();
+
         new BlogCategoryEntitySeed().SeedData(builder);
     }
 }

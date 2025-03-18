@@ -48,6 +48,12 @@ namespace App.eCommerce.Mapping
                 .ForMember(x=>x.CommentCount,opt=>opt.MapFrom(src=>src.Comments.Count))
                 .ForMember(x=>x.SummaryContent,opt=>opt.MapFrom(src=>src.Content.Substring(0,100)))
                 .ReverseMap();
+
+
+            //BlogCategory Mapping
+            CreateMap<BlogCategoryEntity, BlogCategorySidebarViewModel>()
+                .ForMember(x => x.ArticleCount, opt => opt.MapFrom(src => src.BlogRelations.Count))
+                .ReverseMap();
         }
     }
 }
