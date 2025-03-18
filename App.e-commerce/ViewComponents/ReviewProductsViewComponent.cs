@@ -20,7 +20,7 @@ namespace App.Eticaret.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var viewModels = await _dbContext.GetAllIncludingAsync();
+            var viewModels = await _dbContext.GetAllIncludingAsync(p=>p.Comments);
             var viewModel = new OwlCarouselViewModel
             {
                 Title = "Review Products",
@@ -30,21 +30,7 @@ namespace App.Eticaret.ViewComponents
                     .Take(6)
                     .Select(p => _mapper.Map<ProductListingViewModel>(p))
                     .ToList()
-            };
-
-            //        .Select(p => new ProductListingViewModel
-            //        {
-            //            Id = p.Id,
-            //            Name = p.Name,
-            //            Price = p.Price,
-            //            CategoryName = p.Category.Name,
-            //            DiscountPercentage = p.Discount == null ? null : p.Discount.DiscountRate,
-            //            ImageUrl = p.Images.Count != 0 ? p.Images.First().Url : null
-            //        })
-            //        .ToListAsync()
-            //};
-           
-
+            };                    
             return View(viewModel);
         }
     }

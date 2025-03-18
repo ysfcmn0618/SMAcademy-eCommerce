@@ -44,7 +44,10 @@ namespace App.eCommerce.Mapping
             CreateMap<CategoryEntity, CategoryListViewModel>().ReverseMap();
 
             //BlogEntity Mapping
-            CreateMap<BlogEntity, BlogSummaryViewModel>().ReverseMap();
+            CreateMap<BlogEntity, BlogSummaryViewModel>()
+                .ForMember(x=>x.CommentCount,opt=>opt.MapFrom(src=>src.Comments.Count))
+                .ForMember(x=>x.SummaryContent,opt=>opt.MapFrom(src=>src.Content.Substring(0,100)))
+                .ReverseMap();
         }
     }
 }

@@ -5,6 +5,7 @@ using App.eCommerce.Models.ViewModels.ProductViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace App.Eticaret.ViewComponents
 {
@@ -21,13 +22,13 @@ namespace App.Eticaret.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var viewModels = await _dbContext.GetAllIncludingAsync();
+            var viewModels = await _dbContext.GetAllIncludingAsync(p=>p.Comments);
             var viewModel = new OwlCarouselViewModel
             {
                 Title = "Top Rated Products",
                 Items = viewModels
                     .Where(p => p.Enabled)
-                    .OrderByDescending(p => p.Comments.Average(c => c.StarCount))
+                    .OrderByDescending(p => p.Comments.Any() ? p.Comments.Average(c => c.StarCount) : 0)
                     .Take(6)
                     .Select(p => _mapper.Map<ProductListingViewModel>(p))
                     .ToList()

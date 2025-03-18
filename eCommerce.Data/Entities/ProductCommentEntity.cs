@@ -8,7 +8,7 @@ public class ProductCommentEntity : EntityBase
     public int ProductId { get; set; }
     public int UserId { get; set; }
     public string Text { get; set; } = null!;
-    public byte StarCount { get; set; }
+    public byte StarCount { get; set; } = 3;
     public bool IsConfirmed { get; set; } = false;
 
     // Navigation properties

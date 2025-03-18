@@ -20,24 +20,12 @@ namespace App.Eticaret.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var viewModel = await _dbContext.GetAllIncludingAsync();
+            var viewModel = await _dbContext.GetAllIncludingAsync(p=>p.Comments);
             var model = viewModel.Where(e => e.Enabled)
                     .OrderByDescending(e => e.CreatedAt)
                     .Take(3)
                     .Select(e => _mapper.Map<BlogSummaryViewModel>(e))
                     .ToList();
-                   // .Select(e => new BlogSummaryViewModel
-                   // {
-                   //     Id = e.Id,
-                   //     Title = e.Title,
-                   //     SummaryContent = e.Content.Substring(0, 100),
-                   //     ImageUrl = e.ImageUrl,
-                   //     CommentCount = e.Comments.Count,
-                   //     CreatedAt = e.CreatedAt
-
-                   // }).ToList()
-                   //;
-
             return View(model);
         }
     }
