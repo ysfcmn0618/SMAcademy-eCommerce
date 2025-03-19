@@ -14,10 +14,19 @@ namespace App.eCommerce.Mapping
         public ECommerceMappingProfile()
         {
             //UserEntity Mapping
-            CreateMap<RegisterUserModel, UserEntity>().ReverseMap();
+            CreateMap<RegisterUserViewModel, UserEntity>()
+                .ConstructUsing(src => new UserEntity { RoleId = 3 })//varsayılan değer olarak 3 ata 
+                 .AfterMap((src, dest) =>//değer boş ise gene 3 ata
+                 {
+                     if (dest.RoleId == 0) // veya dest.RoleId == null (eğer nullable ise)
+                     {
+                         dest.RoleId = 3;
+                     }
+                 })
+                .ReverseMap();
             CreateMap<ForgotPasswordViewModel, UserEntity>();
             CreateMap<LoginViewModel, UserEntity>();
-            CreateMap<RegisterUserModel, UserEntity>().ReverseMap();
+            CreateMap<RegisterUserViewModel, UserEntity>().ReverseMap();
             CreateMap<RenevPasswordViewModel, UserEntity>();
 
             //ProductEntity Mapping
@@ -45,8 +54,8 @@ namespace App.eCommerce.Mapping
 
             //BlogEntity Mapping
             CreateMap<BlogEntity, BlogSummaryViewModel>()
-                .ForMember(x=>x.CommentCount,opt=>opt.MapFrom(src=>src.Comments.Count))
-                .ForMember(x=>x.SummaryContent,opt=>opt.MapFrom(src=>src.Content.Substring(0,100)))
+                .ForMember(x => x.CommentCount, opt => opt.MapFrom(src => src.Comments.Count))
+                .ForMember(x => x.SummaryContent, opt => opt.MapFrom(src => src.Content.Substring(0, 100)))
                 .ReverseMap();
 
 

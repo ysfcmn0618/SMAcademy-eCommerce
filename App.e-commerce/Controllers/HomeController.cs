@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
 using App.Data.MyDbContext;
 using App.eCommerce.Models;
+using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ECommerceDbContext _dbContext;
         public HomeController(ECommerceDbContext dbContext)

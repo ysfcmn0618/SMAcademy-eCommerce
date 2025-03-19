@@ -50,6 +50,9 @@ namespace App.DbServices.MyEntityInterfacess
         {
             return await _repository.GetByIdIncludingAsync(id, includes);
         }
-
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _repository.FirstOrDefaultAsync(predicate);
+        }
     }
 }

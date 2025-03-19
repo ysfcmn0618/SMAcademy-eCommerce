@@ -1,9 +1,10 @@
 ﻿using App.Data.MyDbContext;
+using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly ECommerceDbContext _dbContext;
         public CartController(ECommerceDbContext dbcontext)

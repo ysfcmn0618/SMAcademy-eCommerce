@@ -3,16 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using App.Data.MyDbContext;
 using System.Threading.Tasks;
 using App.eCommerce.Models.ViewModels.AuthViewModels;
+using App.DbServices.MyEntityInterfacess;
+using App.Data.Entities;
+using AutoMapper;
+using App.DbServices;
+using App.Eticaret.Controllers;
 
 namespace App.eCommerce.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
-        private readonly ECommerceDbContext _dbContext;
+        private readonly BaseDbService<UserEntity> _dbContext;
+        private readonly IMapper _mapper;
 
-        public AuthController(ECommerceDbContext _db)
+        public AuthController(BaseDbService<UserEntity> _db, IMapper mapper):base()
         {
             _dbContext = _db;
+            _mapper = mapper;
         }
         [Route("register")]
         [HttpGet]
@@ -22,14 +29,19 @@ namespace App.eCommerce.Controllers
         }
         [Route("register")]
         [HttpPost]
-        public async Task<IActionResult> Register([FromForm] RegisterUserModel user)
+        public async Task<IActionResult> Register([FromForm] RegisterUserViewModel user)
         {
             if (!ModelState.IsValid)
-            {                
-                return View();
+            {
+                return View(user);
             }
-            //Mapleme işlemleri lazım 
-            // await _dbContext.Users.AddAsync(user);
+            //Mapleme işlemleri lazım
+            var newUser = _mapper.Map<UserEntity>(user);
+            await _dbContext.Add(newUser);
+
+            ViewBag.SuccessMessage = "Kayıt işlemi başarılı. Giriş yapabilirsiniz.";
+            ModelState.Clear();
+
             return RedirectToAction(nameof(Login), "Auth");
         }
 
@@ -44,12 +56,19 @@ namespace App.eCommerce.Controllers
         //[Route("login")]
         [Route("login")]
         [HttpPost]
-        public IActionResult Login([FromForm] LoginViewModel loginModel)
+        public async Task<IActionResult> Login([FromForm] LoginViewModel loginModel)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(loginModel);
             }
+            var user = await _dbContext.FirstOrDefaultAsync(u => u.Email == loginModel.Email && u.Password == loginModel.Password);
+            if (user is null)
+            {
+                ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre hatalı.");
+                return View(loginModel);
+            }
+            await LogInAsync(user);
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -62,12 +81,22 @@ namespace App.eCommerce.Controllers
 
         [Route("forgot-password")]
         [HttpPost]
-        public IActionResult ForgotPassword([FromForm] ForgotPasswordViewModel forgotPasswordMailModel)
+        public async Task<IActionResult> ForgotPassword([FromForm] ForgotPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(model);
             }
+            var user = await _dbContext.FirstOrDefaultAsync(u => u.Email == model.Email);
+            if (user is null)
+            {
+                ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
+                return View(model);
+            }
+            // Şifre sıfırlama kodu oluşturulacak ve kullanıcıya mail gönderilecek...
+            await SendResetPasswordEmailAsync(user);
+            ViewBag.SuccessMessage = "Şifre sıfırlama maili gönderildi. Lütfen e-posta adresinizi kontrol edin.";
+            ModelState.Clear();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -91,11 +120,47 @@ namespace App.eCommerce.Controllers
 
         [Route("logout")]
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             // logout kodları...
-
+            await LogoutUser();
             return RedirectToAction(nameof(Login));
+        }
+        private async Task LogInAsync(UserEntity user)
+        {
+            if (user == null)
+            {
+                return;
+            }
+            
+            SetCookie("userId", user.Id.ToString());
+            SetCookie("mail", user.Email);
+            SetCookie("name", user.FirstName);
+            SetCookie("surname", user.LastName);
+            SetCookie("role", user.RoleId.ToString());
+
+            await Task.CompletedTask;
+        }
+        private async Task LogoutUser()
+        {
+            // TODO: Authorization implemente edildikten sonra bu metot tamamlanacak...
+
+            RemoveCookie("userId");
+            RemoveCookie("mail");
+            RemoveCookie("name");
+            RemoveCookie("surname");
+            RemoveCookie("role");
+        }
+        private async Task SendResetPasswordEmailAsync(UserEntity user)
+        {
+            // Şifre sıfırlama maili gönderme kodları...
+            // TODO: Authorization implemente edildikten sonra bu metot tamamlanacak...
+            if (user == null)
+            {
+                return;
+            }
+
+            await Task.CompletedTask;
         }
     }
 }

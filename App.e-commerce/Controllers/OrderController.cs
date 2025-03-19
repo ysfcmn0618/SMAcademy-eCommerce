@@ -1,9 +1,10 @@
 ﻿using App.Data.MyDbContext;
+using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         private readonly ECommerceDbContext _dbContext;
         public OrderController(ECommerceDbContext dbContext)

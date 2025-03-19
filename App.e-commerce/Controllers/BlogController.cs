@@ -1,10 +1,11 @@
 ﻿using App.Data.Entities;
 using App.DbServices.MyEntityInterfacess;
+using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.eCommerce.Controllers
 {
-    public class BlogController : Controller
+    public class BlogController : BaseController
     {
         private readonly BaseDbService<BlogEntity> _dbContext;
 

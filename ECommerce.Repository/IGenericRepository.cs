@@ -12,5 +12,6 @@ namespace App.Data.Repository
         // Eager Loading için eklenen metod
         Task<IEnumerable<T>> GetAllIncludingAsync(params Expression<Func<T, object>>[] includes);
         Task<T?> GetByIdIncludingAsync(int id, params Expression<Func<T, object>>[] includes);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     }
 }
