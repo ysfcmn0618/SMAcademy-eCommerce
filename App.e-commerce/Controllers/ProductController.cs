@@ -1,6 +1,9 @@
-﻿using App.Data.MyDbContext;
+﻿using App.Data.Entities;
+using App.Data.MyDbContext;
+using App.eCommerce.Models.ViewModels.ProductViewModels;
 using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.eCommerce.Controllers
 {
@@ -11,48 +14,167 @@ namespace App.eCommerce.Controllers
         {
             _dbContext = dbContext;
         }
-        [Route("/product")]
-        [HttpGet]
+        [HttpGet("")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Route("/product")]
-        [HttpPost]
-        public IActionResult Create([FromForm] object newProductModel)
+        [HttpPost("")]
+        public async Task<IActionResult> Create([FromForm] SaveProductViewModel newProductModel)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(newProductModel);
+            }
+
+            var productEntity = new ProductEntity
+            {
+                SellerId = 2, // TODO: User'ı al
+                CategoryId = newProductModel.CategoryId,
+                DiscountId = newProductModel.DiscountId,
+                Name = newProductModel.Name,
+                Price = newProductModel.Price,
+                Description = newProductModel.Description,
+                StockAmount = newProductModel.StockAmount,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _dbContext.Products.Add(productEntity);
+            await _dbContext.SaveChangesAsync();
+
+            await SaveProductImages(productEntity.Id, newProductModel.Images);
+
+            ViewBag.SuccessMessage = "Ürün başarıyla eklendi.";
+            ModelState.Clear();
+
             return View();
         }
 
-        [Route("/product/{productId:int}/edit")]
-        [HttpGet]
-        public IActionResult Edit([FromRoute] int productId)
+        [HttpGet("{productId:int}/edit")]
+        public async Task<IActionResult> Edit([FromRoute] int productId)
         {
+            var productEntity = await _dbContext.Products.FindAsync(productId);
+            if (productEntity is null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new SaveProductViewModel
+            {
+                CategoryId = productEntity.CategoryId,
+                DiscountId = productEntity.DiscountId,
+                Name = productEntity.Name,
+                Price = productEntity.Price,
+                Description = productEntity.Description,
+                StockAmount = productEntity.StockAmount
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost("{productId:int}/edit")]
+        public async Task<IActionResult> Edit([FromRoute] int productId, [FromForm] SaveProductViewModel editProductModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editProductModel);
+            }
+
+            var productEntity = await _dbContext.Products.FindAsync(productId);
+
+            if (productEntity is null)
+            {
+                return NotFound();
+            }
+
+            productEntity.CategoryId = editProductModel.CategoryId;
+            productEntity.DiscountId = editProductModel.DiscountId;
+            productEntity.Name = editProductModel.Name;
+            productEntity.Price = editProductModel.Price;
+            productEntity.Description = editProductModel.Description;
+            productEntity.StockAmount = editProductModel.StockAmount;
+
+            await _dbContext.SaveChangesAsync();
+
+            ViewBag.SuccessMessage = "Ürün başarıyla güncellendi.";
+
+            return View(editProductModel);
+        }
+
+        [HttpGet("{productId:int}/delete")]
+        public async Task<IActionResult> Delete([FromRoute] int productId)
+        {
+            var productEntity = await _dbContext.Products.FindAsync(productId);
+            if (productEntity is null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Products.Remove(productEntity);
+            await _dbContext.SaveChangesAsync();
+
+            ViewBag.SuccessMessage = "Ürün başarıyla silindi.";
+
             return View();
         }
 
-        [Route("/product/{productId:int}/edit")]
-        [HttpPost]
-        public IActionResult Edit([FromRoute] int productId, [FromForm] object editProductModel)
+        [HttpPost("{productId:int}/comment")]
+        public async Task<IActionResult> Comment([FromRoute] int productId, [FromForm] SaveProductCommentViewModel newProductCommentModel)
         {
-            return View();
-        }
+            var userId = GetUserId();
 
-        [Route("/product/{productId:int}/delete")]
-        [HttpGet]
-        public IActionResult Delete([FromRoute] int productId)
-        {
-            return View();
-        }
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
 
-        [Route("/product/{productId:int}/comment")]
-        [HttpPost]
-        public IActionResult Comment([FromRoute] int productId, [FromForm] object newProductCommentModel)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (!await _dbContext.Products.AnyAsync(x => x.Id == productId))
+            {
+                return NotFound();
+            }
+
+            if (await _dbContext.ProductComments.AnyAsync(x => x.ProductId == productId && x.UserId == userId))
+            {
+                return BadRequest();
+            }
+
+            var productCommentEntity = new ProductCommentEntity
+            {
+                ProductId = productId,
+                UserId = userId.Value,
+                Text = newProductCommentModel.Text,
+                StarCount = newProductCommentModel.StarCount,
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            _dbContext.ProductComments.Add(productCommentEntity);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+        private async Task SaveProductImages(int productId, IList<IFormFile> images)
         {
-            // save product comment...
-            //mevcut admin paylaşılan görev de comment ayrı bir controller gibi çalısıyor 
-            return RedirectToAction(nameof(HomeController.ProductDetail), "Home", new { productId });
+            foreach (var image in images)
+            {
+                var productImageEntity = new ProductImageEntity
+                {
+                    ProductId = productId,
+                    Url = $"/uploads/{Guid.NewGuid()}{Path.GetExtension(image.FileName)}"
+                };
+
+                _dbContext.ProductImages.Add(productImageEntity);
+                await _dbContext.SaveChangesAsync();
+
+                await using var fileStream = new FileStream($"wwwroot{productImageEntity.Url}", FileMode.Create);
+                await image.CopyToAsync(fileStream);
+            }
         }
     }
 }
