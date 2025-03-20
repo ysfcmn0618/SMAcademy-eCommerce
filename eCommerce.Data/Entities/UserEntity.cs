@@ -12,6 +12,7 @@ public class UserEntity : EntityBase, IHasEnabled
     public string Password { get; set; } = null!;
     public int RoleId { get; set; }
     public bool Enabled { get; set; } = true;
+    public bool HasSellerRequest { get; set; } = false;
 
     // Navigation properties
     public virtual RoleEntity Role { get; set; } = null!;

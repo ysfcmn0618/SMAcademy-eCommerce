@@ -1,5 +1,8 @@
-﻿@using App.Admin.Models.CategoryViewModels
+﻿
 @model CategoryModel
+@{
+    ViewBag.Title = "Kategori Düzenle";
+}
 <h2>Edit Category</h2>
 
 <form asp-controller="Category" asp-action="Edit" asp-route-categoryId="@Model.Id" method="post">
@@ -32,3 +35,6 @@
         <button type="submit" class="btn btn-primary">Edit</button>
     </div>
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

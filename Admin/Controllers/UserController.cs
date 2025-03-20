@@ -1,5 +1,7 @@
-﻿using App.Data.MyDbContext;
+﻿using App.Admin.Models.ViewModels;
+using App.Data.MyDbContext;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Admin.Controllers
 {
@@ -10,18 +12,78 @@ namespace App.Admin.Controllers
         {
             _dbContext = dbContext;
         }
-        [Route("/users")]
-        [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            return View();
+            List<UserListItemViewModel> users = await _dbContext.Users
+                .Where(u => u.RoleId != 1)
+                .Select(u => new UserListItemViewModel
+                {
+                    Id = u.Id,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    Role = u.Role.Name,
+                    Enabled = u.Enabled,
+                    HasSellerRequest = u.HasSellerRequest
+                })
+                .ToListAsync();
+
+            return View(users);
         }
 
         [Route("/users/{userId:int}/approve")]
         [HttpGet]
-        public IActionResult Approve([FromRoute] int userId)
+        public async Task<IActionResult> ApproveSellerRequest([FromRoute] int id)
         {
-            return View();
+            var user = await _dbContext.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!user.HasSellerRequest)
+            {
+                return BadRequest();
+            }
+
+            user.HasSellerRequest = false;
+            user.RoleId = 2; // seller
+            await _dbContext.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(List));
+        }
+        [Route("/users/{id:int}/enable")]
+        public async Task<IActionResult> Enable([FromRoute] int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Enabled = true;
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(List));
+        }
+
+
+        [Route("/users/{id:int}/disable")]
+        public async Task<IActionResult> Disable([FromRoute] int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Enabled = false;
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(List));
         }
     }
 }
