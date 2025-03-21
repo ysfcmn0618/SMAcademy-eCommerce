@@ -30,7 +30,7 @@ namespace App.eCommerce.Mapping
             CreateMap<LoginViewModel, UserEntity>();
             CreateMap<RegisterUserViewModel, UserEntity>().ReverseMap();
             CreateMap<RenevPasswordViewModel, UserEntity>();
-
+            #region Product Mapping
             //ProductEntity Mapping
             CreateMap<ProductEntity, ProductViewComponentModel>()
                 .ForMember(dest => dest.Img, opt => opt.MapFrom(src =>
@@ -49,9 +49,9 @@ namespace App.eCommerce.Mapping
                 .ForMember(x => x.Reviews, opt => opt.MapFrom(src => src.Comments != null ? src.Comments.ToArray() : new ProductCommentEntity[0])).ReverseMap();
             CreateMap<ProductCommentEntity, ProductReviewViewModel>()
                 .ForMember(x => x.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}")).ReverseMap();
-                
-                
 
+
+            #endregion
 
             //CreateMap<ProductEntity, CategorySliderViewModel>().ReverseMap();
             CreateMap<ProductEntity, FeaturedProductViewModel>().ReverseMap();

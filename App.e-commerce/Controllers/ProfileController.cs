@@ -1,6 +1,7 @@
 ﻿using App.Data.MyDbContext;
 using App.eCommerce.Models.ViewModels.OrderViewModels;
 using App.eCommerce.Models.ViewModels.ProductViewModels;
+using App.eCommerce.Models.ViewModels.ProfileViewModels;
 using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

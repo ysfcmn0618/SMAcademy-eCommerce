@@ -11,16 +11,16 @@ using App.Eticaret.Controllers;
 
 namespace App.eCommerce.Controllers
 {
-    public class AuthController : BaseController
+    public class AuthController(BaseDbService<UserEntity> _dbContext, IMapper _mapper) : BaseController
     {
-        private readonly BaseDbService<UserEntity> _dbContext;
-        private readonly IMapper _mapper;
+        //    private readonly BaseDbService<UserEntity> _dbContext;
+        //    private readonly IMapper _mapper;
 
-        public AuthController(BaseDbService<UserEntity> _db, IMapper mapper):base()
-        {
-            _dbContext = _db;
-            _mapper = mapper;
-        }
+        //public AuthController():base()
+        //{
+        //    _dbContext = _db;
+        //    _mapper = mapper;
+        //}
         [Route("register")]
         [HttpGet]
         public IActionResult Register()

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.eCommerce.Controllers
 {
+    [Route("/product")]
     public class ProductController : BaseController
     {
         private readonly ECommerceDbContext _dbContext;
