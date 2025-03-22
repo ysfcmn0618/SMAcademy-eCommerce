@@ -4,12 +4,16 @@ namespace App.Admin.Models.CategoryViewModels
 {
     public class SaveCategoryViewModel
     {
-        [Required, MaxLength(100)]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Bu alan boş bırakılamaz!"), MaxLength(100)]
+        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string Name { get; set; } = null!;
-
-        [Required]
+        [Required(ErrorMessage = "Bu alan boş bırakılamaz!")]
+        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
         public string Color { get; set; } = null!;
-
-        public string? IconCssClass { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Bu alan boş bırakılamaz!")]
+        [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
+        public string IconCssClass { get; set; } = null!;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

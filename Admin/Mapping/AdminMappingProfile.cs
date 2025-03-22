@@ -11,7 +11,7 @@ namespace App.Admin.Mapping
     {
         public AdminMappingProfile()
         {
-            CreateMap<CategoryModel, CategoryEntity>()
+            CreateMap<SaveCategoryViewModel, CategoryEntity>()
                  .ReverseMap();
             CreateMap<ProductEntity, ProductModel>()
                 .ReverseMap();
