@@ -17,7 +17,7 @@ namespace App.Admin.Models.ProductViewModels
         [DataType(DataType.Currency), Required(ErrorMessage = "Bu alan boş bırakılamaz!")]
         public decimal Price { get; set; }
         [RegularExpression(@"^\S.*$", ErrorMessage = "Boşluk ile başlamaz!")]
-        public string? Details { get; set; }
+        public string? Description { get; set; }
 
         [Required, DataType("tinyint")]
         public ushort StockAmount { get; set; }

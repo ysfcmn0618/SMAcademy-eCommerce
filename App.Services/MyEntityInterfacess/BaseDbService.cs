@@ -1,4 +1,5 @@
 ﻿using App.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace App.DbServices.MyEntityInterfacess
         }
 
         public async Task Delete(int id)
-        {
+        {           
             await _repository.Delete(id);
         }
 

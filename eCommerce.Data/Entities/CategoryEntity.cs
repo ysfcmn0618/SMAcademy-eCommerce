@@ -17,7 +17,7 @@ internal class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEn
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
-        builder.Property(e => e.Color).IsRequired().HasMaxLength(6);
+        builder.Property(e => e.Color).IsRequired().HasMaxLength(7);
         builder.Property(e => e.IconCssClass).IsRequired().HasMaxLength(50);
         builder.Property(e => e.CreatedAt).IsRequired();
         new CategoryEntitySeed().SeedData(builder);

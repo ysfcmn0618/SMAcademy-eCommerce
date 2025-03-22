@@ -5,6 +5,8 @@ using App.Data.MyDbContext;
 using App.DbServices.MyEntityInterfacess;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace App.Admin.Controllers
@@ -78,7 +80,21 @@ namespace App.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete([FromRoute] int categoryId)
         {
-            await _categoryService.Delete(categoryId);
+            try
+            {
+                await _categoryService.Delete(categoryId);
+            }
+            catch (DbUpdateException)
+            {
+                ViewBag.ErrorMessage = "Bu kategori başka bir üründe kullanılıyor.";
+                return RedirectToAction(nameof(List), "Category");
+            }
+            catch (InvalidOperationException)
+            {
+                ViewBag.ErrorMessage = "Geçersiz işlem yapıldı.";
+                return RedirectToAction(nameof(List), "Category");
+            }
+
             return RedirectToAction(nameof(List), "Category");
         }
     }

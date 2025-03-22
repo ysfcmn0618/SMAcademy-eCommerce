@@ -19,7 +19,7 @@
 
     <div class="mb-3">
         <label asp-for="Price" class="form-label">Fiyat</label>
-        <input asp-for="Price" class="form-control" />
+        <input asp-for="Price" type="number" class="form-control" step="0.01" min="0" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
@@ -30,9 +30,9 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Details" class="form-label">Açıklamalar</label>
-        <textarea asp-for="Details" class="form-control"></textarea>
-        <span asp-validation-for="Details" class="text-danger"></span>
+        <label asp-for="Description" class="form-label">Açıklamalar</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label for="CreatedAt" class="form-label">Oluşturma Tarihi</label>
@@ -93,26 +93,6 @@
     <a asp-action="List" asp-controller="Product" class="btn btn-secondary">İptal</a>
 </form>
 
-@* @section Scripts {
-    <script>
-        // Resimleri silme işlemi
-        document.querySelectorAll('.delete-image').forEach(function (button) {
-            button.addEventListener('click', function () {
-                var imageContainer = this.closest('.image-container');
-                imageContainer.remove(); // Resim silindi
-            });
-        });
-
-        // Yorumları toggle etme
-        document.getElementById('toggleComments').addEventListener('click', function () {
-            var commentsContainer = document.getElementById('commentsContainer');
-            if (commentsContainer.style.display === 'none') {
-                commentsContainer.style.display = 'block';
-                this.innerText = 'Yorumları Gizle';
-            } else {
-                commentsContainer.style.display = 'none';
-                this.innerText = 'Yorumları Görüntüle';
-            }
-        });
-    </script>
-} *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
