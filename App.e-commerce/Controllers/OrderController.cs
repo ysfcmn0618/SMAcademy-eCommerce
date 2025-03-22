@@ -10,16 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.eCommerce.Controllers
 {
-    public class OrderController : BaseController
+    public class OrderController(ECommerceDbContext _dbContext, IMapper _mapper) : BaseController
     {
-        private readonly ECommerceDbContext _dbContext;
-        private readonly IMapper _mapper;
-
-        public OrderController(ECommerceDbContext dbContext,IMapper mapper)
-        {
-            _dbContext = dbContext;
-            _mapper = mapper;
-        }
+       
         [Route("/order")]
         [HttpPost]
         //Sipariş Oluşturma
@@ -48,7 +41,7 @@ namespace App.eCommerce.Controllers
             {
                 UserId = userId.Value,
                 Address = model.Address,
-                OrderCode = await CreateOrderCode(),
+                OrderCode = CreateOrderCode(),
                 CreatedAt = DateTime.UtcNow
             };
             _dbContext.Orders.Add(order);
@@ -104,7 +97,7 @@ namespace App.eCommerce.Controllers
             return View(order);
         }
 
-        private async Task<string> CreateOrderCode()
+        private string CreateOrderCode()
         {
             return Guid.NewGuid().ToString("n")[..16].ToUpperInvariant();
         }

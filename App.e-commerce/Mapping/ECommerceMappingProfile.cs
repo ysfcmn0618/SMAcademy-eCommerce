@@ -15,6 +15,7 @@ namespace App.eCommerce.Mapping
     {
         public ECommerceMappingProfile()
         {
+            #region User Entity Mapping
             //UserEntity Mapping
             CreateMap<RegisterUserViewModel, UserEntity>()
                 .ConstructUsing(src => new UserEntity { RoleId = 3 })//varsayılan değer olarak 3 ata 
@@ -30,6 +31,8 @@ namespace App.eCommerce.Mapping
             CreateMap<LoginViewModel, UserEntity>();
             CreateMap<RegisterUserViewModel, UserEntity>().ReverseMap();
             CreateMap<RenevPasswordViewModel, UserEntity>();
+            #endregion
+
             #region Product Mapping
             //ProductEntity Mapping
             CreateMap<ProductEntity, ProductViewComponentModel>()
@@ -50,9 +53,6 @@ namespace App.eCommerce.Mapping
             CreateMap<ProductCommentEntity, ProductReviewViewModel>()
                 .ForMember(x => x.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}")).ReverseMap();
 
-
-            #endregion
-
             //CreateMap<ProductEntity, CategorySliderViewModel>().ReverseMap();
             CreateMap<ProductEntity, FeaturedProductViewModel>().ReverseMap();
             CreateMap<ProductEntity, FeaturedProductViewModel>()
@@ -62,31 +62,45 @@ namespace App.eCommerce.Mapping
                 src.Discount != null ? (byte?)src.Discount.DiscountRate : null)) // İndirim oranı eşleme
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src =>
                      src.Images != null && src.Images.Any() ? src.Images.First().Url : "default-image.jpg")); // İlk resim eşleme
+            #endregion
 
+            #region CategoryEntity Mapping
             //CategoryEntity Mapping
             CreateMap<CategoryEntity, CategoryListViewModel>().ReverseMap();
+            //CreateMap<CategoryEntity, CategoryModel>().ReverseMap();
+            //CreateMap<CategoryEntity, CategoryEditModel>().ReverseMap();
 
+            #endregion
+
+            #region BlogEntity Mapping
             //BlogEntity Mapping
             CreateMap<BlogEntity, BlogSummaryViewModel>()
                 .ForMember(x => x.CommentCount, opt => opt.MapFrom(src => src.Comments.Count))
                 .ForMember(x => x.SummaryContent, opt => opt.MapFrom(src => src.Content.Substring(0, 100)))
                 .ReverseMap();
+            #endregion
 
-
+            #region BlogCategory Mapping
             //BlogCategory Mapping
             CreateMap<BlogCategoryEntity, BlogCategorySidebarViewModel>()
                 .ForMember(x => x.ArticleCount, opt => opt.MapFrom(src => src.BlogRelations.Count))
                 .ReverseMap();
+            #endregion
 
-            //CartItemEntity Mappinf
+            #region CartItemEntity Mapping
+            //CartItemEntity Mapping
             CreateMap<CartItemEntity, CartItemViewModel>()
                 .ForMember(x => x.ProductImage, opt => opt.MapFrom(src => src.Product.Images.Count != 0 ? src.Product.Images.First().Url : null))
                 .ForMember(x => x.Price, opt => opt.MapFrom(src => src.Product.Price))
                 .ForMember(x => x.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ReverseMap();
+            #endregion
 
+            #region ContactformEntity Mapping
             //ContactformEntity Mapping
             CreateMap<ContactFormEntity, NewContactFormMessageViewModel>().ReverseMap();
+            #endregion
+
         }
     }
 }
