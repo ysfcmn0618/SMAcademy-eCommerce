@@ -1,13 +1,13 @@
-﻿
-
+﻿@model SaveCategoryViewModel
 @{
-    ViewBag.Title = "Create New Category";
-    
+    ViewBag.Title = "Yeni Kategori Ekle";
 }
-@model CategoryModel
 
-<h2>Create New Category</h2>
-
+<div class="d-flex">
+    <h2 class="m-0">@ViewBag.Title</h2>
+    <a asp-action="List" class="btn btn-primary ml-auto">Listeye Dön</a>
+</div>
+<partial name="Partials/_ViewMessages" />
 <form asp-controller="Category" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="Name">Kategori Adı</label>

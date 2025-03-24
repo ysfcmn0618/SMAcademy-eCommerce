@@ -13,6 +13,8 @@ namespace App.Admin.Mapping
         {
             CreateMap<SaveCategoryViewModel, CategoryEntity>()
                  .ReverseMap();
+            CreateMap<CategoryListViewModel, CategoryEntity>()
+                 .ReverseMap();
             CreateMap<ProductEntity, ProductModel>()
                 .ReverseMap();
             CreateMap<ProductEntity, ProductEditModel>()

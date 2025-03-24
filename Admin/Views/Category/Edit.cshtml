@@ -1,10 +1,10 @@
 ﻿
-@model CategoryModel
+@model SaveCategoryViewModel
 @{
     ViewBag.Title = "Kategori Düzenle";
 }
 <h2>Edit Category</h2>
-
+<partial name="Partials/_ViewMessages" />
 <form asp-controller="Category" asp-action="Edit" asp-route-categoryId="@Model.Id" method="post">
     <input type="hidden" asp-for="Id" />
     <div class="mb-3">

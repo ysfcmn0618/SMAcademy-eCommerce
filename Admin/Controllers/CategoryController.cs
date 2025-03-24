@@ -27,7 +27,7 @@ namespace App.Admin.Controllers
         {
             var categories = await _categoryService.GetAll();
 
-            return View(_mapper.Map<IEnumerable<CategoryModel>>(categories));
+            return View(_mapper.Map<IEnumerable<CategoryListViewModel>>(categories));
         }
 
         [Route("/categories/create")]
@@ -39,7 +39,7 @@ namespace App.Admin.Controllers
 
         [Route("/categories/create")]
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] CategoryModel newCategoryModel)
+        public async Task<IActionResult> Create([FromForm] CategoryListViewModel newCategoryModel)
         {
             if (!ModelState.IsValid)
             {
@@ -55,12 +55,12 @@ namespace App.Admin.Controllers
         public async Task<IActionResult> Edit([FromRoute] int categoryId)
         {
             var category = await _categoryService.GetById(categoryId);
-            return View(_mapper.Map<CategoryModel>(category));
+            return View(_mapper.Map<CategoryListViewModel>(category));
         }
 
         [Route("/categories/{categoryId:int}/edit")]
         [HttpPost]
-        public async Task<IActionResult> Edit([FromRoute] int categoryId, [FromForm] CategoryModel editCategoryModel)
+        public async Task<IActionResult> Edit([FromRoute] int categoryId, [FromForm] CategoryListViewModel editCategoryModel)
         {
             if (!ModelState.IsValid)
             {

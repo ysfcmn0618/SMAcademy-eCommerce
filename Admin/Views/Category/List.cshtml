@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<CategoryModel>
+﻿@model List<CategoryListViewModel>
 
 @{
     ViewData["Title"] = "Kategoriler";
@@ -24,15 +23,13 @@
                 <td>@category.Id</td>
                 <td>@category.Name</td>
                 <td>
-                    <span style="display:inline-block;width:20px;height:20px;background-color:@category.Color;"></span>
+                    <span style="display:inline-block;width:20px;height:20px;background-color:@(string.IsNullOrEmpty(category.Color) ? "#000" : category.Color);"></span>
                 </td>
                 <td><i class="@category.IconCssClass"></i></td>
                 <td>@category.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
-                    @* <a href="@Url.Action("Edit", "Category", new { id = category.Id })" class="btn btn-warning btn-sm">Düzenle</a> *@
                     <a asp-action="Edit" asp-controller="Category" asp-route-categoryId="@category.Id"  class="btn btn-warning btn-sm">Düzenle</a>
                     <a asp-action="Delete" asp-controller="Category" asp-route-categoryId="@category.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bu kategoriyi silmek istediğinizden emin misiniz?');">Sil</a>
-                    @* <a href="@Url.Action("Delete", "Category", new { id = category.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Bu kategoriyi silmek istediğinizden emin misiniz?');">Sil</a> *@
                 </td>
             </tr>
         }
