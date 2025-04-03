@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    public class BaseDbService<T> : IBaseServiceInterface<T> where T : class
+    public class BaseDbService<T> : IBaseDbService<T> where T : class
     {
         private readonly IGenericRepository<T> _repository;
         public BaseDbService(IGenericRepository<T> repository)

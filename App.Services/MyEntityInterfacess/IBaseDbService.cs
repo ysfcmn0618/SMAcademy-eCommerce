@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.DbServices.MyEntityInterfacess
 {
-    public interface IBaseServiceInterface<T> where T : class
+    public interface IBaseDbService<T> where T : class
     {
         Task Add(T addEntity);
         Task<T> GetById(int id);

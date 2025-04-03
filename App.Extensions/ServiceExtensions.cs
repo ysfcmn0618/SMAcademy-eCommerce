@@ -15,7 +15,7 @@ namespace App.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             // Db Services
-            services.AddScoped(typeof(IBaseServiceInterface<>), typeof(BaseDbService<>));
+            services.AddScoped(typeof(IBaseDbService<>), typeof(BaseDbService<>));
             services.AddScoped(typeof(BaseDbService<>));
             services.AddScoped<ProductService>();
             services.AddScoped<UserService>();

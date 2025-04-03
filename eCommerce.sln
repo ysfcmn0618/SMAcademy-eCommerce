@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Logging", "App.Logging.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Extensions", "App.Extensions\App.Extensions.csproj", "{A11FCD34-3614-4FDE-BBDF-77F125B2BB09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.API", "Data.API\Data.API.csproj", "{2705B7FB-74B9-4959-B9AF-47D2A727B522}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Api.File", "App.Api.File\App.Api.File.csproj", "{BEF08CC9-D043-4EB7-BCF4-38317C7377DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{A11FCD34-3614-4FDE-BBDF-77F125B2BB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A11FCD34-3614-4FDE-BBDF-77F125B2BB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A11FCD34-3614-4FDE-BBDF-77F125B2BB09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2705B7FB-74B9-4959-B9AF-47D2A727B522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2705B7FB-74B9-4959-B9AF-47D2A727B522}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2705B7FB-74B9-4959-B9AF-47D2A727B522}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2705B7FB-74B9-4959-B9AF-47D2A727B522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF08CC9-D043-4EB7-BCF4-38317C7377DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF08CC9-D043-4EB7-BCF4-38317C7377DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF08CC9-D043-4EB7-BCF4-38317C7377DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF08CC9-D043-4EB7-BCF4-38317C7377DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
