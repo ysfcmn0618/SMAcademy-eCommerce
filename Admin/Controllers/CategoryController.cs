@@ -13,10 +13,10 @@ namespace App.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly BaseDbService<CategoryEntity> _categoryService;
+        private readonly IBaseDbService<CategoryEntity> _categoryService;
         private readonly IMapper _mapper;
 
-        public CategoryController(BaseDbService<CategoryEntity> categoryService, IMapper mappingProfile)
+        public CategoryController(IBaseDbService<CategoryEntity> categoryService, IMapper mappingProfile)
         {
             _categoryService = categoryService;
             _mapper = mappingProfile;

@@ -12,10 +12,10 @@ namespace App.eCommerce.Controllers
 {
     public class CartController : BaseController
     {
-        private readonly BaseDbService<CartItemEntity> _dbContext;
+        private readonly IBaseDbService<CartItemEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public CartController(BaseDbService<CartItemEntity> dbcontext,IMapper mapper)
+        public CartController(IBaseDbService<CartItemEntity> dbcontext,IMapper mapper)
         {
             _dbContext= dbcontext;
             _mapper = mapper;

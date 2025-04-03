@@ -7,9 +7,9 @@ namespace App.eCommerce.Controllers
 {
     public class BlogController : BaseController
     {
-        private readonly BaseDbService<BlogEntity> _dbContext;
+        private readonly IBaseDbService<BlogEntity> _dbContext;
 
-        public BlogController(BaseDbService<BlogEntity> dbContext)
+        public BlogController(IBaseDbService<BlogEntity> dbContext)
         {
             _dbContext = dbContext;
         }

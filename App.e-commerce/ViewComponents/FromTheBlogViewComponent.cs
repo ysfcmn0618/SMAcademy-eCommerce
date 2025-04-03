@@ -9,10 +9,10 @@ namespace App.Eticaret.ViewComponents
 {
     public class FromTheBlogViewComponent : ViewComponent
     {
-        private readonly BaseDbService<BlogEntity> _dbContext;
+        private readonly IBaseDbService<BlogEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public FromTheBlogViewComponent(BaseDbService<BlogEntity> context,IMapper mapper)
+        public FromTheBlogViewComponent(IBaseDbService<BlogEntity> context,IMapper mapper)
         {
             _dbContext = context;
             _mapper = mapper;

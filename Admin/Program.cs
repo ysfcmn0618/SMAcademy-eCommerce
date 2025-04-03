@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureServices();
+builder.Services.ConfigureServices(builder.Configuration);
 
 //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 //builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -23,10 +23,10 @@ builder.Services.ConfigureServices();
 //builder.Services.AddScoped<IProductImageService, ProductImageService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ECommerceDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
-}); 
+//builder.Services.AddDbContext<ECommerceDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
+//}); 
 builder.Services.AddAutoMapper(typeof(AdminMappingProfile));
 builder.Services.AddLogging(loggingBuilder =>
 {

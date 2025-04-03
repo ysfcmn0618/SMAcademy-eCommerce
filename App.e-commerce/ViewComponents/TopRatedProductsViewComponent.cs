@@ -11,10 +11,10 @@ namespace App.Eticaret.ViewComponents
 {
     public class TopRatedProductsViewComponent : ViewComponent
     {
-        private readonly BaseDbService<ProductEntity> _dbContext;
+        private readonly IBaseDbService<ProductEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public TopRatedProductsViewComponent(ProductService context, IMapper mapper)
+        public TopRatedProductsViewComponent(IBaseDbService<ProductEntity> context, IMapper mapper)
         {
             _dbContext = context;
             _mapper = mapper;

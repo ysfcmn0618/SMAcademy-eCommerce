@@ -8,10 +8,10 @@ namespace App.eCommerce.ViewComponents
 {
     public class ProductCarouselViewComponent : ViewComponent
     {
-        private readonly BaseDbService<ProductEntity> _productService;
+        private readonly IBaseDbService<ProductEntity> _productService;
         private readonly IMapper _mapper;
 
-        public ProductCarouselViewComponent(BaseDbService<ProductEntity> productService,IMapper mapper)
+        public ProductCarouselViewComponent(IBaseDbService<ProductEntity> productService,IMapper mapper)
         {
             _productService= productService;
             _mapper= mapper;

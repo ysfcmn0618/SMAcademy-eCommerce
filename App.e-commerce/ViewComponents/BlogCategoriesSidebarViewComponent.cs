@@ -8,10 +8,10 @@ namespace App.eCommerce.ViewComponents
 {
     public class BlogCategoriesSidebarViewComponent : ViewComponent
     {
-        private readonly BaseDbService<BlogCategoryEntity> _dbContext;
+        private readonly IBaseDbService<BlogCategoryEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public BlogCategoriesSidebarViewComponent(BaseDbService<BlogCategoryEntity> baseDb,IMapper mapper)
+        public BlogCategoriesSidebarViewComponent(IBaseDbService<BlogCategoryEntity> baseDb,IMapper mapper)
         {
             _dbContext = baseDb;
             _mapper = mapper;

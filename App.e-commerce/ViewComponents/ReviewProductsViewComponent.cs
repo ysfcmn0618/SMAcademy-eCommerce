@@ -9,10 +9,10 @@ namespace App.Eticaret.ViewComponents
 {
     public class ReviewProductsViewComponent : ViewComponent
     {
-        private readonly BaseDbService<ProductEntity> _dbContext;
+        private readonly IBaseDbService<ProductEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public ReviewProductsViewComponent(BaseDbService<ProductEntity> context,IMapper mapper)
+        public ReviewProductsViewComponent(IBaseDbService<ProductEntity> context,IMapper mapper)
         {
             _dbContext = context;
             _mapper = mapper;

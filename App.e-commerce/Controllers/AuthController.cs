@@ -11,9 +11,9 @@ using App.Eticaret.Controllers;
 
 namespace App.eCommerce.Controllers
 {
-    public class AuthController(BaseDbService<UserEntity> _dbContext, IMapper _mapper) : BaseController
+    public class AuthController(IBaseDbService<UserEntity> _dbContext, IMapper _mapper) : BaseController
     {
-        //    private readonly BaseDbService<UserEntity> _dbContext;
+        //    private readonly IBaseDbService<UserEntity> _dbContext;
         //    private readonly IMapper _mapper;
 
         //public AuthController():base()

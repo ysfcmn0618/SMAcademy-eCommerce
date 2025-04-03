@@ -9,10 +9,10 @@ namespace App.Eticaret.ViewComponents
 {
     public class CategoryListViewComponent : ViewComponent
     {
-        private readonly BaseDbService<CategoryEntity> _context;
+        private readonly IBaseDbService<CategoryEntity> _context;
         private readonly IMapper _mapper;
 
-        public CategoryListViewComponent(BaseDbService<CategoryEntity> context, IMapper mapper)
+        public CategoryListViewComponent(IBaseDbService<CategoryEntity> context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

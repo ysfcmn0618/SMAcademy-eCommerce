@@ -10,9 +10,9 @@ namespace App.Api.File.Controllers
     public class FileController : ControllerBase
     {
         private readonly string _storagePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-        private readonly BaseDbService<ProductImageEntity> _repo;
+        private readonly IBaseDbService<ProductImageEntity> _repo;
 
-        public FileController(BaseDbService<ProductImageEntity> repo)
+        public FileController(IBaseDbService<ProductImageEntity> repo)
         {
             _repo = repo;
             if (!Directory.Exists(_storagePath))

@@ -11,10 +11,10 @@ namespace App.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly BaseDbService<ProductEntity> _productService;
+        private readonly IBaseDbService<ProductEntity> _productService;
         private readonly IMapper _mapper;
 
-        public ProductController(BaseDbService<ProductEntity> productService,IMapper mapper)
+        public ProductController(IBaseDbService<ProductEntity> productService,IMapper mapper)
         {
             _productService = productService;
             _mapper= mapper;

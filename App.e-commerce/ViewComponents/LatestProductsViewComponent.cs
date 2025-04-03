@@ -9,10 +9,10 @@ namespace App.Eticaret.ViewComponents
 {
     public class LatestProductsViewComponent : ViewComponent
     {
-        private readonly BaseDbService<ProductEntity> _dbContext;
+        private readonly IBaseDbService<ProductEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public LatestProductsViewComponent(BaseDbService<ProductEntity> context,IMapper mapper)
+        public LatestProductsViewComponent(IBaseDbService<ProductEntity> context,IMapper mapper)
         {
             _dbContext = context;
             _mapper = mapper;

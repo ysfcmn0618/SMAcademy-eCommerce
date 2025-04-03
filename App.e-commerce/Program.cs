@@ -22,13 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddScoped<IProductCommentService, ProductCommentService>();
 //builder.Services.AddScoped<IProductImageService, ProductImageService>();
 
-builder.Services.ConfigureServices();
+builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ECommerceDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnectionString"));
-});
+
 builder.Services.AddAutoMapper(typeof(ECommerceMappingProfile));
 builder.Services.AddLogging(loggingBuilder =>
 {

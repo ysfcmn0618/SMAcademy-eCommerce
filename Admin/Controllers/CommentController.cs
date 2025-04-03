@@ -10,10 +10,10 @@ namespace App.Admin.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly BaseDbService<ProductCommentEntity> _dbContext;
+        private readonly IBaseDbService<ProductCommentEntity> _dbContext;
         private readonly IMapper _mapper;
 
-        public CommentController(BaseDbService<ProductCommentEntity> productCommentService, IMapper mapper)
+        public CommentController(IBaseDbService<ProductCommentEntity> productCommentService, IMapper mapper)
         {
             _dbContext = productCommentService;
             _mapper = mapper;
