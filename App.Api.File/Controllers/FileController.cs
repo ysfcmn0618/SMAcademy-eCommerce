@@ -28,7 +28,7 @@ namespace App.Api.File.Controllers
         /// <param name="file">Yüklenecek dosya</param>
         /// <returns>Başarılı yanıt</returns>
         [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile(IFormFile file,int productId)
+        public async Task<IActionResult> UploadFile(IFormFile file, int productId)
         {
             if (file == null || file.Length == 0)
                 return BadRequest("Dosya seçilmedi.");
@@ -39,6 +39,12 @@ namespace App.Api.File.Controllers
             {
                 await file.CopyToAsync(stream);
             }
+            await _repo.Add(new ProductImageEntity
+            {
+                ProductId = productId,
+                Url = filePath,
+                CreatedAt = DateTime.Now
+            });
 
             return Ok(new { message = "Dosya yüklendi.", fileName = file.FileName });
         }
@@ -65,13 +71,19 @@ namespace App.Api.File.Controllers
         /// <param name="fileName">Silinecek dosya</param>
         /// <returns>Başarılı yanıt</returns>
         [HttpDelete("delete/{fileName}")]
-        public IActionResult DeleteFile(string fileName)
+        public async Task<IActionResult> DeleteFile(string fileName)
         {
             var filePath = Path.Combine(_storagePath, fileName);
             if (!System.IO.File.Exists(filePath))
                 return NotFound("Dosya bulunamadı.");
 
             System.IO.File.Delete(filePath);
+            var file = await _repo.GetAll();
+            var afile = file.Where(p => p.Url == filePath).FirstOrDefault();
+            if (afile == null)
+                return NotFound("Veritabanında dosya bulunamadı.");
+            await _repo.Delete(afile.Id);
+
             return Ok(new { message = "Dosya silindi.", fileName });
         }
 
@@ -81,11 +93,14 @@ namespace App.Api.File.Controllers
         /// </summary>
         /// <returns>Başarılı yanıt</returns>
         [HttpGet("list")]
-        public IActionResult GetAllFiles()
+        public async Task<IActionResult> GetAllFiles()
         {
+            // burdaki yaklaşımdaki amaç seed sahte dalar hazırlanırken eklenen dosyaların url lerini de dosya sistemimize eklemek amaçlanmıştır.Farklı dosya konumu işaret eden dataları da eklemektir.
+            var productImages = await _repo.GetAll();
+            var fileUrls = productImages.Select(p => p.Url).ToList();
             var files = Directory.GetFiles(_storagePath);
-            var fileNames = Array.ConvertAll(files, Path.GetFileName);
-
+            var fileNames = files.Select(Path.GetFileName).ToList();
+            fileNames.AddRange(fileUrls);
             return Ok(fileNames);
         }
         // 4. Tüm Dosyaları Listeleme
@@ -96,12 +111,12 @@ namespace App.Api.File.Controllers
         /// <returns>Başarılı yanıt</returns>
         [HttpGet("productFiles")]
         public async Task<IActionResult> GetProductFiles(int productId)
-        {            
-            var productImages = await _repo.GetAllIncludingAsync(p=>p.Product.Id==productId);
+        {
+            var productImages = await _repo.GetAllIncludingAsync(p => p.Product.Id == productId);
 
             if (productImages == null || !productImages.Any())
                 return NotFound("Ürüne ait dosya bulunamadı.");
-            var productFileUrls = productImages.Select(p => p.Url).ToList();           
+            var productFileUrls = productImages.Select(p => p.Url).ToList();
 
             return Ok(productFileUrls);
         }
