@@ -42,7 +42,10 @@ namespace App.Data.Repository
         {
            return await _dbSet.ToListAsync();
         }
-
+        public IQueryable<T> GetAllAsync()
+        {
+            return _dbContext.Set<T>();
+        }
         public async Task<T> GetById(int id)
         {
             var entity = await _dbSet.FindAsync(id);

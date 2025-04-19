@@ -10,6 +10,7 @@ public class UserEntity : EntityBase, IHasEnabled
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string Password { get; set; } = null!;
+    public string? ResetPasswordToken { get; set; }
     public int RoleId { get; set; }
     public bool Enabled { get; set; } = true;
     public bool HasSellerRequest { get; set; } = false;
