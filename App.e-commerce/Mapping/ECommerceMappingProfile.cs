@@ -30,7 +30,7 @@ namespace App.eCommerce.Mapping
             CreateMap<ForgotPasswordViewModel, UserEntity>();
             CreateMap<LoginViewModel, UserEntity>();
             CreateMap<RegisterUserViewModel, UserEntity>().ReverseMap();
-            CreateMap<RenevPasswordViewModel, UserEntity>();
+            CreateMap<RenewPasswordViewModel, UserEntity>();
             #endregion
 
             #region Product Mapping

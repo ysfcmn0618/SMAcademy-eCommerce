@@ -1,7 +1,7 @@
 ﻿using App.Data.Entities;
 using App.Data.Infrastructure.MyDbContext;
-using App.DbServices.MyEntityInterfacess;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace App.Eticaret.Controllers
 {
@@ -21,26 +21,63 @@ namespace App.Eticaret.Controllers
 
         protected async Task<UserEntity?> GetCurrentUserAsync()
         {
-            var userIdStr = GetCookie("userId");
+            //var userIdStr = GetCookie("userId");
 
-            if (!int.TryParse(userIdStr, out int userId))
+            //if (!int.TryParse(userIdStr, out int userId))
+            //{
+            //    return null;
+            //}
+
+            //var dbContext = GetService<ECommerceDbContext>();
+
+            //if (dbContext == null)
+            //{
+            //    return null;
+            //}
+
+            //return await dbContext.Users.FindAsync(userId);
+            var userId = GetUserId();
+
+            if (userId is null)
             {
                 return null;
             }
 
-            var dbContext = GetService<ECommerceDbContext>();
+            var clientFactory = GetService<IHttpClientFactory>();
 
-            if (dbContext == null)
+            if (clientFactory == null)
             {
                 return null;
             }
 
-            return await dbContext.Users.FindAsync(userId);
+            var client = clientFactory.CreateClient("Api.Data");
+
+            if (client == null)
+            {
+                return null;
+            }
+
+            var response = await client.GetAsync($"api/user/{userId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var user = await response.Content.ReadFromJsonAsync<UserEntity>();
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
         }
 
-        protected bool IsUserLoggedIn() => GetCookie("userId") != null;
+        protected bool IsUserLoggedIn() => /*GetCookie("userId") != null;*/User.Identity?.IsAuthenticated ?? false;
 
-        protected int? GetUserId() => int.TryParse(GetCookie("userId"), out int userId) ? userId : null;
+        protected int? GetUserId() => /*int.TryParse(GetCookie("userId"), out int userId) ? userId : null;*/int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId) ? userId : null;
+    
 
         protected async Task<bool> IsUserAdminAsync()
         {

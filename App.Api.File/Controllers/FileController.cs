@@ -1,4 +1,5 @@
 ﻿using App.Data.Entities;
+using App.Data.Repository;
 using App.DbServices.MyEntityInterfacess;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace App.Api.File.Controllers
     public class FileController : ControllerBase
     {
         private readonly string _storagePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-        private readonly IBaseDbService<ProductImageEntity> _repo;
+        private readonly IGenericRepository<ProductImageEntity> _repo;
 
-        public FileController(IBaseDbService<ProductImageEntity> repo)
+        public FileController(IGenericRepository<ProductImageEntity> repo)
         {
             _repo = repo;
             if (!Directory.Exists(_storagePath))
@@ -39,6 +40,14 @@ namespace App.Api.File.Controllers
             {
                 await file.CopyToAsync(stream);
             }
+            var existProduct = await _repo.FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (existProduct != null)
+            {
+                existProduct.Url = filePath;
+                await _repo.Update(existProduct);
+                return Ok(new { message = "Dosya güncellendi.", fileName = file.FileName });
+            }
+
             await _repo.Add(new ProductImageEntity
             {
                 ProductId = productId,
@@ -82,6 +91,9 @@ namespace App.Api.File.Controllers
             var afile = file.Where(p => p.Url == filePath).FirstOrDefault();
             if (afile == null)
                 return NotFound("Veritabanında dosya bulunamadı.");
+
+            //Veritabanından dosyayı silmeden önce product kullanılıyormu actifmi gibi bir kontrol daha gerekli diye düşünüyorum fakat su an direk silme işlemini gerçekleştiriyorum.
+
             await _repo.Delete(afile.Id);
 
             return Ok(new { message = "Dosya silindi.", fileName });
