@@ -1,5 +1,5 @@
 ﻿using App.Data.Entities;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure.MyDbContext;
 using App.eCommerce.Models.ViewModels.ProductViewModels;
 using App.Eticaret.Controllers;
 using Microsoft.AspNetCore.Mvc;

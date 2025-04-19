@@ -1,26 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using App.Data.MyDbContext;
 using System.Threading.Tasks;
 using App.eCommerce.Models.ViewModels.AuthViewModels;
-using App.DbServices.MyEntityInterfacess;
 using App.Data.Entities;
 using AutoMapper;
-using App.DbServices;
 using App.Eticaret.Controllers;
+using App.Data.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.eCommerce.Controllers
 {
-    public class AuthController(IBaseDbService<UserEntity> _dbContext, IMapper _mapper) : BaseController
+    [AllowAnonymous]
+    public class AuthController(IGenericRepository<UserEntity> _dbContext, IMapper _mapper,IHttpClientFactory clientFactory) : BaseController
     {
-        //    private readonly IBaseDbService<UserEntity> _dbContext;
-        //    private readonly IMapper _mapper;
+        private HttpClient Client => clientFactory.CreateClient("Api.Data");
 
-        //public AuthController():base()
-        //{
-        //    _dbContext = _db;
-        //    _mapper = mapper;
-        //}
         [Route("register")]
         [HttpGet]
         public IActionResult Register()

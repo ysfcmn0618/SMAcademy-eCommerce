@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Admin", "Admin\App.Admi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data", "eCommerce.Data\App.Data.csproj", "{5014CD5F-FC99-48C7-962E-840F97B28579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data.Repository", "ECommerce.Repository\App.Data.Repository.csproj", "{BD48672F-87C8-4F0F-820F-722F048CF529}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.DbServices", "App.Services\App.DbServices.csproj", "{F596F833-9610-4237-A6B4-3C22E053F81A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Logging", "App.Logging.LoggerService\App.Logging.csproj", "{D7051251-7E54-4659-B900-1F1C37D403B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Extensions", "App.Extensions\App.Extensions.csproj", "{A11FCD34-3614-4FDE-BBDF-77F125B2BB09}"
@@ -37,14 +33,6 @@ Global
 		{5014CD5F-FC99-48C7-962E-840F97B28579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5014CD5F-FC99-48C7-962E-840F97B28579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5014CD5F-FC99-48C7-962E-840F97B28579}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD48672F-87C8-4F0F-820F-722F048CF529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD48672F-87C8-4F0F-820F-722F048CF529}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD48672F-87C8-4F0F-820F-722F048CF529}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD48672F-87C8-4F0F-820F-722F048CF529}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F596F833-9610-4237-A6B4-3C22E053F81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F596F833-9610-4237-A6B4-3C22E053F81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F596F833-9610-4237-A6B4-3C22E053F81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F596F833-9610-4237-A6B4-3C22E053F81A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7051251-7E54-4659-B900-1F1C37D403B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7051251-7E54-4659-B900-1F1C37D403B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7051251-7E54-4659-B900-1F1C37D403B1}.Release|Any CPU.ActiveCfg = Release|Any CPU

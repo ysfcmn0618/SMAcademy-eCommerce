@@ -1,8 +1,6 @@
 ﻿using App.Data.Entities;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure.MyDbContext;
 using App.Data.Repository;
-using App.DbServices;
-using App.DbServices.MyEntityInterfacess;
 using App.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +23,7 @@ namespace App.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             // Db Services
-            services.AddScoped(typeof(IBaseDbService<>), typeof(BaseDbService<>));
+           // services.AddScoped(typeof(IBaseDbService<>), typeof(BaseDbService<>));
            // services.AddScoped(typeof(BaseDbService<>));
             //services.AddScoped<ProductService>();
             //services.AddScoped<UserService>();

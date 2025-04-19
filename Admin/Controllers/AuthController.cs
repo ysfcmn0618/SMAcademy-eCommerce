@@ -1,5 +1,5 @@
 ﻿using App.Admin.Models.ViewModels;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure.MyDbContext;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Admin.Controllers

@@ -1,6 +1,7 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using App.Data.Infrastructure.MyDbContext
+@using Microsoft.EntityFrameworkCore
 @model SaveProductViewModel
-@inject App.Data.MyDbContext.ECommerceDbContext dbContext
+@inject ECommerceDbContext dbContext
 @{
     ViewData["Title"] = "Create Product";
     var discounts = await dbContext.ProductDiscounts

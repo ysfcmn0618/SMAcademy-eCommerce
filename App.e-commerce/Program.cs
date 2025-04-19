@@ -1,4 +1,3 @@
-using App.Data.MyDbContext;
 using App.Data.Repository;
 using App.DbServices.MyEntityInterfacess;
 using App.DbServices;
@@ -6,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using App.eCommerce.Mapping;
 using App.Logging;
 using App.Extensions;
+using App.Data.Infrastructure.MyDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 

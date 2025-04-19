@@ -1,5 +1,5 @@
 ﻿using App.Data.Entities;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

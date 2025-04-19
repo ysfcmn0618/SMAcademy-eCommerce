@@ -20,9 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\App.Extensions\App.Extensions.csproj" />
     <ProjectReference Include="..\App.Logging.LoggerService\App.Logging.csproj" />
-    <ProjectReference Include="..\App.Services\App.DbServices.csproj" />
     <ProjectReference Include="..\eCommerce.Data\App.Data.csproj" />
-    <ProjectReference Include="..\ECommerce.Repository\App.Data.Repository.csproj" />
   </ItemGroup>
 
 </Project>

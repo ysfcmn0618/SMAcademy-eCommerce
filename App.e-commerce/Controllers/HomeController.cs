@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using App.Data.Entities;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure.MyDbContext;
 using App.DbServices.MyEntityInterfacess;
 using App.eCommerce.Models;
 using App.eCommerce.Models.ViewModels.HomeControllerViewModels;

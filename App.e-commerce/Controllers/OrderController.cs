@@ -1,5 +1,5 @@
 ﻿using App.Data.Entities;
-using App.Data.MyDbContext;
+using App.Data.Infrastructure.MyDbContext;
 using App.DbServices.MyEntityInterfacess;
 using App.eCommerce.Models.ViewModels.CartItemViewModel;
 using App.eCommerce.Models.ViewModels.OrderViewModels;

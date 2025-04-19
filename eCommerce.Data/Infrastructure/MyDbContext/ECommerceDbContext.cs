@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using App.Data.Entities;
 
-namespace App.Data.MyDbContext
+namespace App.Data.Infrastructure.MyDbContext
 {
     public class ECommerceDbContext : DbContext
     {

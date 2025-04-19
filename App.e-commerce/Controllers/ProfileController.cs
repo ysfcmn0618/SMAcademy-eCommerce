@@ -1,4 +1,4 @@
-﻿using App.Data.MyDbContext;
+﻿using App.Data.Infrastructure.MyDbContext;
 using App.eCommerce.Models.ViewModels.OrderViewModels;
 using App.eCommerce.Models.ViewModels.ProductViewModels;
 using App.eCommerce.Models.ViewModels.ProfileViewModels;

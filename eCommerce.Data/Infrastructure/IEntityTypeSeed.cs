@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace App.Data.MyDbContext
+namespace App.Data.Infrastructure
 {
     public interface IEntityTypeSeed<T> where T : class
     {
